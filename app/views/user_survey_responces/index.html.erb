@@ -1,0 +1,345 @@
+   <%= simple_form_for :user_survey_responce, :url => user_survey_responces_path, :input_html => { :class => 'form-vertical'  } do |f| %>
+
+
+
+
+<%= f.error_notification %>
+<%= display_base_errors resource %>
+
+<div class="container">
+  <div class="row-fluid">
+
+    <div class="span2 row-fluid">
+
+    </div>
+      
+
+
+        <div class="span8">
+          <div class="box paint">
+            <div class="title">
+              <div class="row-fluid">
+                <% if @current_question.question_type == 'INFORMATION' %>
+                <h4> <%=@responce_set.survey.title.html_safe%></h4>
+                <% else %>
+                 <h4><%=@current_question.survey_section.title.html_safe%></h4>
+                <%end%>
+              </div>
+            </div>
+            <!-- End .title -->
+            <div class="content">
+             
+              <!-- End .row-fluid -->
+               <% if ((@current_question.description.nil? == false) && (@current_question.description.empty? == false)) %>
+              <div class="row-fluid">
+                <div class="row-fluid well">
+
+                 
+
+                 <p><%=@current_question.description.html_safe%></p>
+
+                 
+
+                </div>
+              </div>
+            <%end%>
+
+              <% if @current_question.question_type != 'INFORMATION' %>
+               <div class="row-fluid">
+                <div class="row-fluid well">
+                      <blockquote><strong><%= @current_question.question.html_safe %></strong></blockquote>
+                  
+                  <% if @responce.completed == true %>
+                  <blockquote><strong>Answer: <%= @responce.question_responce %></strong></blockquote>
+                 <% else %>
+                  <div class="span2 row-fluid">
+
+                  </div>
+                   <% if @current_question.question_type == 'AGE' %>
+
+                  <div class="span8 row-fluid we1ll ">
+                    <%= f.input :question_responce, label: false, input_html: { class: 'row-fluid', min: '16', max:'75', onfocus: "this.type='number';this.min='16';" },placeholder: "Please enter your age in years" %>
+                  </div>
+                  <% elsif @current_question.question_type == 'GENDER' %>
+                      <div class="span8 row-fluid we1ll ">
+                      <%= f.input :question_responce,label: false, collection: [:male, :female],as: :radio_buttons %>
+                  </div>
+                   <% elsif @current_question.question_type == 'WEIGHT' %>
+                      <div class="span8 row-fluid we1ll ">
+                      <%= f.input :question_responce_weight, label: false, input_html: { class: 'row-fluid', min: '1',onfocus: "this.type='number';" },placeholder: "Please enter your weight and select the units"  %>
+                      <%= f.input :question_responce_units,label: false, collection: [:kg, :lb],:selected => 0 %>
+                  </div>
+                   <% elsif @current_question.question_type == 'HEIGHT' %>
+                      <div class="span8 row-fluid we1ll "> 
+                        <%= f.input :question_responce_height, label: false, input_html: { class: 'row-fluid',min: '1',onfocus: "this.type='number';"  },placeholder: "Please enter your height and select the units"   %>
+                      <%= f.input :question_responce_units,label: false, collection: [:cm, :ft],:selected => 0 %>
+                  </div>
+                   <% elsif @current_question.question_type == 'EDUCATION' %>
+                      <div class="span8 row-fluid we1ll ">
+                      <%= f.input :question_responce,label: false, collection: [:'no formal qualifications', :'secondary school (high school)',:'trade/apprenticeship (e.g., hairdresser, chef)',:'certificate or diploma (e.g., childcare, technician)',:'university, tertiary or higher education (e.g., bachelor’s, master’s, PhD)'],as: :radio_buttons %>
+
+                  </div>
+                  <% elsif @current_question.question_type == 'DAYSPERWEEK' %>
+
+                  <div class="span8 row-fluid we1ll ">
+                    <%= f.input :question_responce, label: false, input_html: { class: 'row-fluid', min: '1', max:'7',onfocus: "this.type='number';" }, placeholder: "days per week" %>
+                  </div>
+                   <% elsif @current_question.question_type == 'MINUTESPERDAY' %>
+                      <div class="span8 row-fluid we1ll ">
+                         <%= f.input :question_responce, label: false, input_html: { class: 'row-fluid', min: '10', max:'720',onfocus: "this.type='number';" },placeholder: "minutes per day" %>
+                  </div>
+                   <% elsif @current_question.question_type == 'HOURSPERWEEK' %>
+
+                  <div class="span8 row-fluid we1ll ">
+                    <%= f.input :question_responce, label: false, inline_label: 'Yes, remember me', input_html: { class: 'row-fluid',onfocus: "this.type='number';"  }, placeholder: "hours per week" %>
+                  </div>
+                   <% elsif @current_question.question_type == 'HOURSPERDAY' %>
+
+                  <div class="span8 row-fluid we1ll ">
+                    <%= f.input :question_responce, label: false, inline_label: '', input_html: { class: 'row-fluid', min: '4', max:'12',onfocus: "this.type='number';"  }, placeholder: "hours per day" %>
+                  </div>
+                  <% elsif @current_question.question_type == 'JOBDIFFICULT' %>
+                      <div class="span8 row-fluid we1ll ">
+                      <%= f.input :question_responce,label: false, collection: [
+                        :'difficult all of the time (100%)', 
+                        :'difficult most of the time',
+                        :'difficult some of the time (about 50%)',
+                        :'difficult a slight bit of the time',
+                        :'difficult none of the time (0%)',
+                        :'does not apply to my job'],
+                        as: :radio_buttons %>
+
+                  </div>
+                   <% elsif @current_question.question_type == 'JOBTYPE' %>
+                      <div class="span8 row-fluid we1ll ">
+                      <%= f.input :question_responce,label: false, collection: [
+                        :'professional, management or administration', 
+                        :'white collar, clerical, sales or service work',
+                        :'blue collar, tradesperson, labourer or general services',
+                        :'other'],
+                        as: :radio_buttons %>
+                         <%= f.input :question_responce_other, label: false, input_html: { class: 'row-fluid' },placeholder: "Please specify"  %>
+                       
+
+                  </div>
+                   <% elsif @current_question.question_type == 'JOBTIME' %>
+                    <div class="span8 row-fluid we1ll ">
+                      <%= f.input :question_responce,label: false, collection: [
+                        :'full time', 
+                        :'part time',
+                        :'casual',
+                        :'other'],
+                        as: :radio_buttons %>
+                         <%= f.input :question_responce_other, label: false, input_html: { class: 'row-fluid' },placeholder: "Please specify"  %>
+                       
+
+                  </div>
+
+                   <% elsif @current_question.question_type == 'ACTIVITYLEVEL' %>
+                      <div class="span8 row-fluid we1ll ">
+                      <%= f.input :question_responce,label: false, collection: [
+                        :'very active', 
+                        :'active',
+                        :'inactive',
+                        :'very inactive'],
+                        as: :radio_buttons %>
+
+                  </div>
+
+                  <% elsif @current_question.question_type == 'JOBCOMPLETION' %>
+                      <div class="span8 row-fluid we1ll ">
+                      <%= f.input :question_responce,label: false, collection: [
+                        :'able all of the time (100%)', 
+                        :'able most of the time',
+                        :'able some of the time (about 50%)',
+                        :'able a slight bit of the time',
+                         :'able none of the time (0%)',
+                          :'does not apply to my job'],
+                        as: :radio_buttons %>
+
+                  </div>
+                   <% elsif @current_question.question_type == 'ACTIVITYLIMIT' %>
+                      <div class="span8 row-fluid we1ll ">
+                      <%= f.input :question_responce,label: false, collection: [
+                        :'Limited a lot', 
+                        :'Limited a little',
+                        :'Not limited at all'],
+                        as: :radio_buttons %>
+
+                  </div>
+                  <% elsif @current_question.question_type == 'YESNO' %>
+                      <div class="span8 row-fluid we1ll ">
+                      <%= f.input :question_responce,label: false, collection: [
+                        :'Yes', 
+                        :'No'],
+                        as: :radio_buttons %>
+
+                  </div>
+                  <% elsif @current_question.question_type == 'YESNOSKIP' %>
+                      <div class="span8 row-fluid we1ll ">
+                      <%= f.input :question_responce,label: false, collection: [
+                        :'Yes'],
+                        as: :check_boxes %>
+
+                          <% if @current_question.skip_to_question_id %>
+                         <%= f.input :question_responce_skipped,  label: false,inline_label: 'No', as: :boolean %>
+                       <%end%>
+
+                  </div>
+                   <% elsif @current_question.question_type == 'DAYSPERWEEKV' %>
+
+                  <div class="span8 row-fluid we1ll ">
+                    <%= f.input :question_responce, label: false, input_html: { class: 'row-fluid', min: '1', max:'7',onfocus: "this.type='number';" }, placeholder: "days per week"%>
+                    <% if @current_question.skip_to_question_id %>
+                         <%= f.input :question_responce_skipped,  label: false, inline_label: "No vigorous physical activities", as: :boolean %>
+                       <%end%>
+                  </div>
+                   <% elsif @current_question.question_type == 'DAYSPERWEEKW' %>
+
+                  <div class="span8 row-fluid we1ll ">
+                    <%= f.input :question_responce, label: false, input_html: { class: 'row-fluid', min: '1', max:'7',onfocus: "this.type='number';" }, placeholder: "days per week" %>
+                    <% if @current_question.skip_to_question_id %>
+                         <%= f.input :question_responce_skipped,  label: false, inline_label: "No walking", as: :boolean %>
+                       <%end%>
+                  </div>
+                  <% elsif @current_question.question_type == 'DAYSPERWEEKM' %>
+
+                  <div class="span8 row-fluid we1ll ">
+                    <%= f.input :question_responce, label: false, input_html: { class: 'row-fluid', min: '1', max:'7',onfocus: "this.type='number';" }, placeholder: "days per week" %>
+                    <% if @current_question.skip_to_question_id %>
+                         <%= f.input :question_responce_skipped,  label: false, inline_label: "No moderate physical activities ", as: :boolean %>
+                       <%end%>
+                  </div>
+                  <% elsif @current_question.question_type == 'HEALTH' %>
+                       <div class="span8 row-fluid we1ll ">
+                      <%= f.input :question_responce,label: false, collection: [
+                        :'Excellent',
+                        :'Very good',
+                        :'Good',
+                        :'Fair',
+                        :'Poor'],
+                        as: :radio_buttons %>
+
+                  </div>
+                  <% elsif @current_question.question_type == 'CONCENTRATION' %>
+                       <div class="span8 row-fluid we1ll ">
+                      <%= f.input :question_responce,label: false, collection: [
+                        :'Not at all',
+                        :'Slightly',
+                        :'Moderately',
+                        :'Quite a bit',
+                        :'Extremely'],
+                        as: :radio_buttons %>
+
+                  </div>
+                    <% elsif @current_question.question_type == 'FEELING' %>
+                       <div class="span8 row-fluid we1ll ">
+                      <%= f.input :question_responce,label: false, collection: [
+                        :'All of the time',
+                        :'Most of the time',
+                        :'Some of the time',
+                        :'A little of the time',
+                        :'None of the time'],
+                        as: :radio_buttons %>
+
+                  </div>
+                   <% elsif @current_question.question_type == 'AGREE' %>
+                       <div class="span8 row-fluid we1ll ">
+                      <%= f.input :question_responce,label: false, collection: [
+                        :'Strongly disagree',
+                        :'Disagree',
+                        :'Neutral',
+                        :'Agree',
+                        :'Strongly agree'],
+                        as: :radio_buttons %>
+
+                  </div>
+                     <% elsif @current_question.question_type == 'AGREENA' %>
+                       <div class="span8 row-fluid we1ll ">
+                      <%= f.input :question_responce,label: false, collection: [
+                        :'Strongly disagree',
+                        :'Disagree',
+                        :'Neutral',
+                        :'Agree',
+                        :'Strongly agree',
+                        :'Not applicable – not used'],
+                        as: :radio_buttons %>
+
+                  </div>
+                  <% elsif @current_question.question_type == 'SPECIFY' %>
+                    <div class="span8 row-fluid we1ll ">
+                         <%= f.input :question_responce, label: false, input_html: { class: 'row-fluid' },placeholder: "Please specify"  %>
+                       
+
+                  </div>
+                  
+
+                  <%end%>
+                  <div class="span2 row-fluid">
+
+                 </div>
+                   
+                </div>
+              </div>
+
+               <%end%>
+               <%else%>
+                <%= f.hidden_field :question_responce, :value => "Answer not required."  %>
+               <%end%>
+                <%= f.hidden_field :question_id, :value => @current_question.id %>
+                <%= f.hidden_field :responce_id, :value => @responce.id %>
+                <%= f.hidden_field :responce_type, :value => @current_question.question_type%>
+
+
+              <!-- End .row-fluid -->
+              <div class="row-fluid">
+                <div class="row-fluid well">
+                  <div class="span2 row-fluid">
+                  <% if (@current_question.previous_question_id.nil? == false)   %>
+                     <%= f.button :submit, 'Back',:name => "back_button",  :class => 'btn btn-large btn-block btn-danger' %>
+                     <%end%>
+                   </div>
+                    <div class="span4 row-fluid">
+
+                      <% if @current_question.question_type != 'INFORMATION' %>
+
+                      <% if @responce.completed == true %>
+                      <%= f.button :submit, 'Edit',:name => "edit_button",  :class => 'btn btn-large btn-block btn-warning' %>
+                      <%else %>
+                       <%= f.button :submit, 'Skip',:name => "skip_button",  :class => 'btn btn-large btn-block btn-warning' %>
+                      <% end %>   
+                      <% end %>             
+                   </div> 
+                   <div class="span5 row-fluid">
+                    <% if (@current_question.next_question_id.nil? == true)   %>
+                     <%= f.button :submit, 'Finish',:name => "next_button",  :class => 'btn btn-large btn-block btn-success' %>
+                      <% elsif @responce.completed == true %>
+                       <%= f.button :submit, 'Next',:name => "complete_next_button", :class => 'btn btn-large btn-block btn-success' %>
+                       <%else %>
+                        <%= f.button :submit, 'Next',:name => "next_button", :class => 'btn btn-large btn-block btn-success' %>
+                        <% end %>     
+                   </div>        
+                 
+                  <div class="marginB10"></div>
+                </div>
+              </div>
+              <!-- End .row-fluid --> 
+            </div>
+            <!-- End .content --> 
+          </div>
+        </div>
+  
+ <div class="span2 row-fluid">
+
+    </div>
+
+    </div>
+     </div> 
+
+       
+
+<% end %>
+
+
+
+

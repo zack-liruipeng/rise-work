@@ -1,0 +1,34 @@
+<div class="row-fluid box paint color_2">
+  <div class="title">
+    <h4> <i class="icon-signin"></i> <span>Sign in</span> </h4>
+  </div>
+  <div class="content contentText" id="noBkgdShdw">
+    <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name),input_html: { class: 'bs-docs-example form-horizontal'}) do |f| %>
+    <div class="control-group row-fluid">
+      <label class="control-label span3" for="inputPassword">Email:</label>
+      <div class="controls span9 input-append">
+        <%= f.input :email, :autofocus => true, label: false, input_html: { class: 'row-fluid' } %>
+        <span class="add-on"><i class="icon-user"></i></span>
+      </div>
+    </div>
+    <div class="control-group row-fluid">
+      <label class="control-label span3" for="inputPassword">Password:</label>
+      <div class="controls span9 input-append">
+        <%= f.input :password, label: false, input_html: { class: 'row-fluid' }%>
+        <span class="add-on"><i class="icon-lock"></i></span>
+      </div>
+    </div>
+    <div class="control-group row-fluid">
+      <div class="controls span9">
+        <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name),:class => 'btn btn-link btn-mini',  :id => 'noBkgdShdw' %>
+        <%= link_to "Forgot your password?", new_password_path(resource_name), :class => 'btn btn-link btn-mini', :id => 'noBkgdShdw' %>
+      </div>
+      <div class="controls span3">
+        <%= f.button :submit, "Sign in", label: false, input_html: { class: 'btn btn-success' } %>
+		<a href="/users/sign_up" class="btn btn-primary">Sign up</a><br />
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+<!-- End .box -->

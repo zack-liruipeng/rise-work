@@ -1,0 +1,8 @@
+---
+content_path: 
+partials: {}
+index_path: index.html
+stylesheet_dir: stylesheets
+image_dir: images
+javascript_dir: app/assets/javascripts
+no_sass: false

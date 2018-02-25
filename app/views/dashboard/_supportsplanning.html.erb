@@ -1,0 +1,76 @@
+<div id="modal-content-action-planning" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-width="760">
+  
+  <%= simple_form_for :task, :url => tasks_path, :input_html => { :class => 'form-vertical'  } do |f| %>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel"><%= @actual_phase.name %> Action Planning</h3>
+  </div>
+  <div class="modal-body">
+    <% if ((@actual_phase.name == "Phase 1") || (@actual_phase.name == "Phase 2"))  %>
+    <p>This strategy involves creating a plan, or detailed outline, of the steps you will take to engage in a specific activity so you can reach your new target step count.  You could plan to walk some of the way to and from work, take a walk at lunch with a friend, or plan a walking meeting.</p>
+    <%else%>
+    <p>This strategy involves creating a plan, or detailed outline, of the steps you will take to engage in a specific activity so you can reach your new target step count. You may come across barriers that steer you away from carrying through with your activity, so come up with a specific plan to overcome these barriers.</p>
+    <%end%>
+    <p> <b>Remember be as precise as you can when making your walking plan!</b></p>
+    <table id="datatable_example" class="responsive table table-striped table-bordered" style="width:100%;margin-bottom:0; ">
+      <thead> <tr> <th class="">Try using this 3-Step Approach to forming your personalized walking plan:</th> </tr> </thead>
+      <tbody>
+        <tr> <td><b>1.</b> Choose an appropriate length of time to plan your activity for (e.g., over the next week).</td></tr>
+        <tr> <td><b>2.</b> Identify activities that you are interested in participating in (or have always wanted to try), such as walking to work or organizing a walking meeting. </td></tr>
+        <tr>  <td><b>3.</b> Complete the “PERSONALIZED WALKING PLAN” listed below:</td></tr>
+      </tbody>
+    </table>
+    
+    <div class="row-fluid box color_0">
+      
+      <div class="content">
+        
+        <div class="form-row control-group row-fluid">
+          <label class="control-label span3">What: </label>
+          <div class="controls span9">
+            <%= f.input :strategy_what, label: false, :required => true, placeholder: "What activity you plan to do", input_html: { class: 'row-fluid' }%>
+          </div>
+        </div>
+        <div class="form-row control-group row-fluid">
+          <label class="control-label span3">Where: </label>
+          <div class="controls span9">
+            <%= f.input :strategy_where, :autofocus => true, :required => true, placeholder: "Where you will do this activity", label: false, input_html: { class: 'row-fluid span12' } %>
+          </div>
+        </div>
+        <div class="form-row control-group row-fluid">
+          <label class="control-label span3">When: </label>
+          <div class="controls span9">
+            <%= f.input :strategy_when, :autofocus => true, :required => true, placeholder: "The day and time of day you will do this activity", label: false, input_html: { class: 'row-fluid span12' } %>
+          </div>
+        </div>
+        <% if ((@actual_phase.name != "Baseline") && (@actual_phase.name != "Phase 1") && (@actual_phase.name != "Phase 2"))  %>
+        <div class="form-row control-group row-fluid">
+          <label class="control-label span3">Barriers: </label>
+          <div class="controls span9">
+            <%= f.input :strategy_barriers, :autofocus => true, :required => true, placeholder: "Barriers to doing this activity and plans to overcome them", label: false, input_html: { class: 'row-fluid span12' } %>
+          </div>
+        </div>
+        <%end%>
+        <div class="form-row control-group row-fluid">
+          <label class="control-label span3">Number of steps:</label>
+          <div class="controls span9 ">
+            <div class="row-fluid"> <span class="add-on"></span>
+            <%= f.input :strategy_amount, :required => true,placeholder: "Number of steps you will take during this activity", label: false, input_html: { class: 'row-fluid' } %>
+          </div>
+        </div>
+      </div>
+      
+      <%= f.hidden_field :strategy_task_type,:value =>'userdefined' %>
+      <%= f.hidden_field :strategy_description, :value => "Custom action plan" %>
+      
+    </div>
+  </div>
+  <!-- End .box -->
+  
+</div>
+<div class="modal-footer">
+  <%= f.button :submit, "Plan Activity", label: false, input_html: { class: 'btn btn-primary' } %>
+</div>
+
+<% end %>
+</div>

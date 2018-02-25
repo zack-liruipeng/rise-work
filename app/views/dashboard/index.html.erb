@@ -1,0 +1,646 @@
+<div id="main">
+	<div class="header row-fluid">
+		<div class="logo"> <a href="#"><span>Rise@Work</span></a> </div>
+		<div class="top_right">
+			<ul class="nav nav_menu">
+				<li class="dropdown"> <a class="dropdown-toggle administrator" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
+					<div class="title"><span class="name"><%=  @user_name %></span><span class="subtitle" style="width: 250px;">Participant in <%= @actual_phase.name %></span></div>
+					<span class="icon"><img src="images/user.png"></span></a>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+						<li><a data-toggle="modal" href="#modal-content-update-user"><i class=" icon-cog"></i>Account Settings</a></li>
+						<%  if (current_user.has_role? :admin or current_user.has_role? :research_admin) %>
+						<li>
+							<%= link_to users_path do %>
+							<i class=" icon-user"></i>View Participants
+							<% end %>
+						</li>
+						<li>
+							<%= link_to "/organizations" do %>
+							<i class=" icon-globe"></i>View Organizations
+							<% end %>
+						</li>
+						<li>
+							<%= link_to "/strategies" do %>
+							<i class=" icon-tasks"></i>View Strategies
+							<% end %>
+						</li>
+						<% end %>
+						<li>
+							<%= link_to destroy_user_session_path, :method=>'delete' do %>
+							<i class=" icon-signout"></i>Logout
+							<% end %>
+						</li>
+						<li><a  href="downloads/RAW-Help-Guide.pdf"><i class="icon-question-sign"></i>Help</a></li>
+					</ul>
+				</li>
+			</ul>
+			<div>
+				<div class="hidding-nav">
+					<a class="btn" data-toggle="collapse" data-target=".nav-collapse" id="noBkgdShdw"><p style=" padding-top: 22px; margin-right: -5px;">
+						<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="35.375px" height="27.062px" viewBox="0 0 35.375 27.062" enable-background="new 0 0 35.375 27.062" xml:space="preserve">
+							<line fill="none" stroke="#434343" stroke-width="2" stroke-miterlimit="10" x1="0.438" y1="1.263" x2="35.003" y2="1.263"/>
+								<line fill="none" stroke="#434343" stroke-width="2" stroke-miterlimit="10" x1="0.438" y1="13.521" x2="35.003" y2="13.521"/>
+									<line fill="none" stroke="#434343" stroke-width="2" stroke-miterlimit="10" x1="0.438" y1="25.779" x2="35.003" y2="25.779"/>
+									</svg></p>
+								</a>
+							</div>
+						</div>
+					</div>
+					<!-- End top-right -->
+					<div class="nav-collapse collapse">
+						<div class="hidding-nav">
+							<ul class="nav">
+								<li><a data-toggle="modal" href="#modal-content-update-user"><i class=" icon-cog"></i>Account Settings</a></li>
+								<%  if current_user.has_role? :admin %>
+								<li id="plus1024">
+									<%= link_to users_path do %>
+									<i class=" icon-user" ></i>View Participants
+									<% end %>
+								</li>
+								<% end %>
+								<li>
+									<%= link_to destroy_user_session_path, :method=>'delete' do %>
+									<i class=" icon-signout"></i>Logout
+									<% end %>
+								</li>
+								<li><a  href="downloads/RAW-Help-Guide.pdf"><i class="icon-question-sign"></i>Help</a></li>
+							</ul>
+						</div>
+						</div><!--/.nav-collapse -->
+					</div>
+					<div class="modal hide fade" id="modal-content" data-keyboard="false" data-backdrop="static">
+						<div class="modal-header">
+							<h3>
+							Welcome to the RISE@Work program
+							</h3>
+						</div>
+						<div class="modal-body">
+							<div class="row-fluid">
+								<div class="span12">
+									<div class="span10">
+										<b>Hi <%= @user_name.html_safe%>,</b></br>
+										<hr>
+										Thank you for enrolling in the RISE@Work program. As the first step, we'd like to learn more about your health and wellbeing, physical activity participation, sitting time, work productivity, and some general information about you (e.g., age, education). Please click on the link below to complete the questionnaire.
+										<hr>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<%= link_to 'Complete Questionnaire', '/surveys',:class => 'btn btn-link' %>
+						</div>
+					</div>
+					<div class="modal hide fade" id="modal-content-followup" data-keyboard="false" data-backdrop="static">
+						<div class="modal-header">
+							<h3>
+							RISE@Work Almost Complete!
+							</h3>
+						</div>
+						<div class="modal-body">
+							<div class="row-fluid">
+								<div class="span12">
+									<div class="span10">
+										<b>Hi <%= @user_name.html_safe%>,</b></br>
+										<hr>
+										Congratulations, you are nearly finished all five phases of RISE@Work! </br> </br>
+										Before you log your last step, please click on the button below to complete the Follow-up Questionnaire. You will be asked many of these same questions that you answered at Baseline, plus questions about your impressions of the RISE@Work website and program. Your feedback will help us to improve the program for the future.
+										<hr>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<%= link_to 'Complete Questionnaire', '/surveys',:class => 'btn btn-link' %>
+						</div>
+					</div>
+					<div class="modal hide fade" id="modal-content-finished" data-keyboard="false" data-backdrop="static">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							<h3>
+							RISE@Work Complete!
+							</h3>
+						</div>
+						<div class="modal-body">
+							<div class="row-fluid">
+								<div class="span12">
+									<div class="span10">
+										<b>Thank you <%= @user_name.html_safe%>,</b></br>
+										<hr>
+										You have completed the RISE@Work program and Follow-up Questionnaire. We hope that you will maintain being physically active by walking everyday.
+										<hr>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<%= render 'edituser' %>
+					<%= render 'supportstrategies' %>
+					<%= render 'supportsplanning' %>
+					<%= render 'editsteps' %>
+					<%= render 'edittasks' %>
+					<%= render 'viewachievements' %>
+					<%= render 'shownewachievements' %>
+					<%= render 'supportroutes' %>
+					<%= render 'editorganization' %>
+					<div id="modal-started-phase" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-width="760">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+							<h3 id="myModalLabel">
+							<% if @actual_phase.name == "Baseline"%>
+							Welcome to the RISE@Work program
+							<%else%>
+							Welcome to <%=@actual_phase.name %>
+							<%end%>
+							</h3>
+						</div>
+						<div class="modal-body">
+							<div class="row-fluid">
+								<div class="span12">
+									<div class="span10">
+										<b>Hi <%= @user_name.html_safe%>,</b></br>
+										<hr>
+										<%= @actual_phase.description.html_safe%>
+										<hr>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="container" style="max-width:1280px;">
+						<div class="row-fluid">
+							<div class="row-fluid box color_2 title_medium height_medium2 bar_stats paint_hover " >
+								<div class="title">
+									<h5 style="padding-top: 4px;"><span>Performance</span>
+									<div style="width: 280px;">
+										<% if @actual_phase.name != "Baseline"%>
+										<% if @star_performance >= 0.0 %>
+										<div class="stars star" style="padding: initial;"></div>
+										<% else %>
+										<div class="stars nostar" style="padding: initial;"></div>
+										<% end %>
+										<%if @star_performance >= 0.40 %>
+										<div class="stars star" style="padding: initial;"></div>
+										<% else %>
+										<div class="stars nostar" style="padding: initial;"></div>
+										<% end %>
+										<%if @star_performance >= 0.60 %>
+										<div class="stars star" style="padding: initial;"></div>
+										<% else %>
+										<div class="stars nostar" style="padding: initial;"></div>
+										<% end %>
+										<%if @star_performance >= 0.75 %>
+										<div class="stars star" style="padding: initial;"></div>
+										<% else %>
+										<div class="stars nostar" style="padding: initial;"></div>
+										<% end %>
+										<%if @star_performance >= 0.85 %>
+										<div class="stars star" style="padding: initial;"></div>
+										<% else %>
+										<div class="stars nostar last" style="padding: initial; float: left;"></div>
+										<% end %>
+										<%end%>
+									</div>
+									</h5>
+								</div>
+								<!-- End .title -->
+								<div class="content row-fluid fluid numbers">
+									<div class="span12b" >
+										<div class="span2 average_ct " style="margin-left:295px;padding-left: 15px;" id="plus1280">
+											<% if @actual_phase.name != 'Baseline' %>
+											<h1 class="value"><%= @daily_target %></h1>
+											<div class="description mt15" style="padding-top: 0.5%;">Daily Step Target</div>
+											<% end %>
+										</div>
+										<div class="span3 shown_left" style="margin-left:0px;" id="plus1280">
+											<div class="row-fluid fluid">
+												<div class="span6" style="margin-left:0px;">
+													<div class="description">Steps Taken</div>
+													<h2 class="value"><%=  @phase_steps_taken_human_string %></h2>
+												</div>
+												<% if @actual_phase.name != 'Baseline' %>
+												<div class="span6 full" style="margin-left:3px;">
+													<div class="description text_color_dark">Steps Left</div>
+													<h2 class="value text_color_dark"><%= @phase_steps_left_human_string %></h2>
+												</div>
+												<% end %>
+											</div>
+											<div class="row-fluid fluid">
+												<div class="span12">
+													<div class="progress small progress-success progress-striped active">
+														<div class="bar white" style="width: <%= @percent_complete %>%;"></div>
+													</div>
+													<div class="description" ><%= @actual_phase.name %> STEP STATS</div>
+												</div>
+											</div>
+										</div>
+										<div class="span4 total_days" style="margin-left:0px;" id="plus1280">
+											<div class="row-fluid">
+												<div class="span6 total_clicks">
+													<h1 class="value"><%=  @total_steps_taken_human_string %></h1>
+													<div class="description mt15" >TOTAL STEPS</div>
+												</div>
+												<div class="span6 days_left " style="padding-left: 13px; margin-left: 0px;"  id="plus1280">
+													<h1 class="value text_color_dark"><%=  @days_left_in_phase %></h1>
+													<div class="description mt15" >DAYS LEFT in <%= @actual_phase.name %></div>
+												</div>
+											</div>
+										</div>
+										<div class="span3 stick top right result height_medium2 points plus500" id="noBkgdShdw"  style="margin-left:0px;padding-left: 15px;"> <h1 class="value" style="text-align: right; padding-right: 10px;"><%= current_user.ppv%></h1>
+											<div class="description mt15" >POINTS</div>
+										</div>
+									</div>
+								</div>
+								<!-- End .row-fluid -->
+								<!-- End .content -->
+							</div>
+							<!-- End .box -->
+						</div>
+						<div class="row-fluid box color_14 title_medium height_medium2 bar_stats paint_hover " id="less1024">
+							<div class="title" style="position: static;">
+								<h5 style="padding-top: 4px;"><span>Daily Step Target</span></h5></div>
+								<div class="span3 stick top right result height_medium2 points plus500" id="noBkgdShdw"  style="margin-left:0px;padding-left: 15px; "> <h1 class="value" style="text-align: right; padding-right: 10px; padding-top:40px;"><%=@daily_target %></h1>
+								</div>
+							</div>
+							<!-- End .box -->
+							<div id="main_container">
+								<% if @current_user.activities.count > 0 %>
+								<div class="row-fluid">
+									<div class="span12" id="bigGraph">
+										<div class="box color_light title_big  paint_hover" style="margin-bottom:0px;">
+											<div class="title">
+												<div class="row-fluid">
+													<h4> <span style="color: #D3D3D3;">Overall&nbspProgress</span> </h4>
+													<!-- End .span12 -->
+												</div>
+												<!-- End .row-fluid -->
+											</div>
+											<!-- End .title -->
+											<div class="content"  style="padding-top:-12px;">
+												<div id="placeholderphaseall"  style="width:100%;height:200px;">
+													<%= chart("placeholderphaseall", @all_study_phase_collections_hashes,{
+													xaxis: {
+													show: true,
+													mode: "time",
+													minTickSize: [1, "day"],
+													ticks: @phase_tick
+													},
+													yaxis: {
+													show: true,
+													tickDecimals: 0,
+													min: 0
+													},
+													legend:{ show:false },
+													grid: { show:true, hoverable: true, clickable: false, autoHighlight: true, borderWidth:0,color: '#7D7D7D' , tickColor: '#DDDDDD'  }} ,{:placeholder_tag => false,:js_includes => false}) %>
+												</div>
+												<div class="row-fluid description">
+													<div class="center"><p style="margin-top: -10px; margin-bottom: inherit;font-size: 130%;color: #7D7D7D;"><span>Days</span></p><i class="icon-stop" style="color: #4a8cf7;"></i>&nbsp;Step Target&nbsp;&nbsp;&nbsp;&nbsp;<i class="icon-stop" style="color: #a1d14d"></i>&nbsp;Steps Over&nbsp;&nbsp;&nbsp;&nbsp; <i class="icon-stop"style="color: #ed4723"></i>&nbsp;Steps Under</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<%end%>
+								<div class="row-fluid">
+									<div class="span6 " id="bigGraph">
+										<div class="box color_3 title_big height_xbig paint_hover">
+											<div class="title">
+												<div class="row-fluid">
+													<div class="span12">
+														<h4> <span>Daily&nbspSteps</span> </h4>
+													</div>
+													<!-- End .span12 -->
+												</div>
+												<!-- End .row-fluid -->
+											</div>
+											<!-- End .title -->
+											<div class="content"  style="padding-top:28px;">
+												<div id="placeholderphase" style="width:100%;height:333px;">
+													<%= chart("placeholderphase", { "Over Baseline" => { :collection => @current_phase_overbaseline, :x => :x, :y => :y, :options => {:color => "rgba(0,0,0,0.2)",:shadowSize => "0",:bars => {:show =>true,:lineWidth=>"0"},:fill=>true,:fillColor=> "{ colors: [ { opacity: 1 }, { opacity: 1 } ] }" }},@actual_phase.name + " Steps" => { :collection => @current_phase_collection, :x => :x, :y => :y, :options => {:color => "rgba(0,0,0,0.2)",:shadowSize => "0",:bars => {:show =>true,:lineWidth=>"0"},:fill=>true,:fillColor=> "{ colors: [ { opacity: 1 }, { opacity: 1 } ] }" }},@actual_phase.name + " Baseline" => { :collection => @phase_graph_baseline_collection, :x => :x, :y => :y, :options => {:color => "rgba(255,255,255, 0.4)",:shadowSize => "0",:bars => {:show =>false},:lines => {:show =>true,:fill=>false},:points => {:show =>false},:fill=>true,:fillColor=> "{ colors: [ { opacity: 1 }, { opacity: 1 } ] }" }} },{
+													series: {
+													bars: {show:true, barWidth: 0.6}
+													},
+													xaxis: {
+													show: true,
+													ticks: @daily_phase_ticks,
+													min: 0
+													},
+													yaxis: {
+													show: true,
+													tickDecimals: 0,
+													min: 0
+													},
+													legend:{ show:false },
+													grid: { show:true, hoverable: false, clickable: false, autoHighlight: true, borderWidth:0 ,color: '#FFFFFF'  }} ,{:placeholder_tag => false,:js_includes => false}) %>
+												</div>
+												<div class="row-fluid description">
+													<div class="pull-left">past</div>
+													<div class="pull-right">present</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- End .span6 -->
+									<!-- End .box .span6-->
+									<div class="span2b" id="plus1024">
+										<div class=" box color_25 height_medium paint_hover">
+											<div class="content icon big_icon"> <a data-toggle="modal"href="#modal-content-view-achievements" ><img align="center" src="images/general/achv_icon.png" /></a>
+											<div class="description">ACHIEVEMENTS</div>
+										</div>
+									</div>
+								</div>
+								<div class="span2b" id="plus1024">
+									<div class=" box color_12 height_medium paint_hover">
+										<div class="content icon big_icon">
+											<% if @actual_phase.strategies.count == 0 %>
+											<a  data-toggle="modal" href="#" ><img align="center" src="images/general/lock_icon.png" /></a>
+											<div class="description">STRATEGIES (LOCKED)</div>
+											<% else %>
+											<a  data-toggle="modal" href="#modal-content-support-strategies" ><img align="center" src="images/general/contacts_icon.png" /></a>
+											<div class="description">SUPPORT STRATEGIES</div>
+											<%end%>
+										</div>
+									</div>
+								</div>
+								<div class="span2b" id="plus1024">
+									<div class=" box color_14 height_medium paint_hover">
+										<div class="content icon big_icon">
+											<% if ((@actual_phase.name == "Baseline") || (@actual_phase.name == "Phase 1"))   %>
+											<a  data-toggle="modal" href="#" ><img align="center" src="images/general/lock_icon.png" /></a>
+											<div class="description">ACTION PLANNING (LOCKED)</div>
+											<% else %>
+											<a  data-toggle="modal" href="#modal-content-action-planning" ><img align="center" src="images/general/action_icon.png" /></a>
+											<div class="description">ACTION PLANNING</div>
+											<%end%>
+										</div>
+									</div>
+								</div>
+								<div class="span4b" id="stepLogger">
+									<%= render 'steplogger' %>
+								</div>
+								<div class="span2b" id="plus1024afterLogger">
+									<div class=" box color_18 height_medium paint_hover">
+										<div class="content icon big_icon">
+											<% if ((@actual_phase.name == "Baseline") || (@actual_phase.name == "Phase 1"))   %>
+											<a  data-toggle="modal" href="#" ><img align="center" src="images/general/lock_icon.png" /></a>
+											<div class="description">ROUTES (LOCKED)</div>
+											<% else %>
+											<a  data-toggle="modal" href="#modal-content-support-routes" ><img align="center" src="images/general/map_icon.png" /></a>
+											<div class="description">ROUTES</div>
+											<%end%>
+										</div>
+									</div>
+								</div>
+								<!-- End .span6 -->
+							</div>
+							<!-- start second line -->
+							<div class="row-fluid fluid">
+								<div class="span6" id="plus1024">
+									<div class="box color_18 title_big height_big paint_hover">
+										<div class="title">
+											<div class="row-fluid">
+												<div class="span12">
+													<h5 style="font-size: 85px;position: relative;">TOTAL STEPS</h5>
+													<% if @actual_phase.name != "Baseline"%>
+													<h5 style="font-size: 35px; position: relative; margin-left: 50px;"><%=  @performance_vs_baseline %><span>% </span>OF TARGET</h5>
+													<%else%>
+													<h5 style="font-size: 35px; position: relative; margin-left: 50px;">CALCULATING TARGET...</h5>
+													<%end%>
+												</div>
+												<!-- End .span12 -->
+											</div>
+											<!-- End .row-fluid -->
+										</div>
+										<!-- End .title -->
+										<div class="content"  style="padding-top:28px;">
+											<div id="placeholderphaseacc" style="width:100%;height:240px;">
+												<%= chart("placeholderphaseacc", {  "Overbaseline" => { :collection => @current_phase_overbaseline_acc, :x => :x, :y => :y, :options => {:color => "rgba(0,0,0,1.0)",:shadowSize => "0",:bars => {:show =>true,:lineWidth=>"0"},:fill=>true,:fillColor=> "{ colors: [ { opacity: 1 }, { opacity: 1 } ] }" }},@actual_phase.name + " Steps" => { :collection => @current_phase_collection_acc, :x => :x, :y => :y, :options => {:color => "rgba(0,0,0,1.0)",:shadowSize => "0",:bars => {:show =>true,:lineWidth=>"0"},:fill=>true,:fillColor=> "{ colors: [ { opacity: 1 }, { opacity: 1 } ] }" }},@actual_phase.name + " Baseline" => { :collection => @goal_collection_acc, :x => :x, :y => :y, :options => {:color => "rgba(255,255,255, 0.4)",:shadowSize => "0",:bars => {:show =>false},:lines => {:show =>true,:fill=>false},:points => {:show =>false},:fill=>true,:fillColor=> "{ colors: [ { opacity: 1 }, { opacity: 1 } ] }" }} },{
+												series: {
+												bars: {show:true, barWidth: 0.6}
+												},
+												xaxis: {
+												show: false,
+												tickDecimals: 0,
+												min: 0
+												},
+												yaxis: {
+												show: true,
+												tickDecimals: 0,
+												min: 0
+												},
+												legend:{ show:false },
+												grid: { show:true, hoverable: false, clickable: false, autoHighlight: true, borderWidth:0 ,color: '#FFFFFF' }} ,{:placeholder_tag => false,:js_includes => false}) %>
+											</div>
+											<div class="row-fluid description">
+												<div class="pull-left">past</div>
+												<div class="pull-right">present</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- <div class="span3b" id="plus1024">
+											<div class=" box  color_25 height_big title_big paint_hover">
+														<div class="title">
+																	<div class="row-fluid">
+																				<div class="span12">
+																							<h5> </i><span>Overall Progress</span> </h5>
+																				</div>
+												<!-- End .span12 -->
+											<!--  </div>
+											<!-- End .row-fluid -->
+										<!--</div>
+										<!-- End .title -->
+										<!--<div class="content" style="padding-top:28px;">
+													<div id="placeholderstudy" style="width:100%;height:240px;">
+																<%= chart("placeholderstudy", { "Steps" => { :collection => @all_study_activities_collections, :x => :x, :y => :y, :options => {:color => "rgba(0,0,0,0.2)",:shadowSize => "0",:bars => {:show =>true,:lineWidth=>"0"},:fill=>true,:fillColor=> "{ colors: [ { opacity: 1 }, { opacity: 1 } ] }" }}},{
+																series: {
+																	bars: {show:true, barWidth: 0.6},
+																	},
+																	xaxis: {
+																		show: false,
+																		tickDecimals: 0,
+																		min: 0
+																		},
+																		yaxis: {
+																			show: false,
+																			tickDecimals: 0,
+																			min: 0
+																			},
+																			legend:{ show:false },
+																			grid: { show:true, hoverable: true, clickable: false, autoHighlight: true, borderWidth:0   }} ,{:placeholder_tag => false,:js_includes => false}) %>
+																</div>
+																<div class="row-fluid description">
+																			<div class="pull-left">baseline</div>
+																			<div class="pull-right">today</div>
+																</div>
+													</div>
+										</div>
+								</div>-->
+								<!-- End .span6 -->
+								<div class="span6b" id="plus1024" >
+									<%= render 'tasks' %>
+								</div>
+								<!-- End second row -->
+							</div>
+							<!-- start dl bar row -->
+							<div class="row-fluid">
+								<div class="span12" id="plus1024">
+									<div class="box color_2 row-fluid">
+										<div class="title">
+											<h4 class="pull-left"> <span>Download Take a Stand App</span> </h4>
+											<div class="btn-toolbar pull-right ">
+												<% if (@actual_phase.name == "Baseline")  %>
+												<div class="btn-group"> <a href="#" class="btn"id="noBkgdShdw"><i class="icon-lock"></i> Windows</a> <a  href="#" class="btn" id="noBkgdShdw"><i class="icon-lock"></i> OSX</a>  </div>
+												<%else%>
+												<div class="btn-group"> <a href="downloads/RAW-TakeStandApp-WIN.zip" class="btn" onClick="_gaq.push(['_trackEvent', 'Apps', 'Download', 'Take a Stand for Windows']);" id="noBkgdShdw"><i class="icon-th-large"></i> Windows</a> <a  href="downloads/RAW-TakeStandApp-OSX.zip" class="btn" onClick="_gaq.push(['_trackEvent', 'Apps', 'Download', 'Take a Stand for OSX']);" id="noBkgdShdw"><i class="icon-off"></i> OSX</a>  </div>
+												<%end%>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- End main container -->
+					</div>
+				</div>
+				<!-- End main tag -->
+			</div>
+			<script type="text/javascript">
+			var phaseObjects = new Array();
+			var indexXObjects = new Array();
+			var indexYObjects = new Array();
+			<% @current_user.activities.sort_by(&:activity_date).each do |activity| %>
+			phaseObjects.push('<div id="tooltip"><div class="date"><%=activity.activity_date.to_s%><\/div><div class="title "><%=activity.amount.to_s%><\/div><div class="description">Steps<\/div><\/div>')
+					indexXObjects.push(<%= (activity.activity_date.strftime("%b %d, %Y")).to_time.to_i * 1000%>)
+					indexYObjects.push(<%=activity.amount%>)
+					<% end%>
+					function showTooltip(x, y, contents) {
+						$(contents).css( {
+							position: 'absolute',
+							display: 'none',
+							top: y - 125,
+							left: x - 24,
+							border: '0px solid #ccc',
+							padding: '2px 6px',
+							'background-color': '#fff',
+							opacity: 10
+						}).appendTo("body").fadeIn(200);
+					}
+					var previousPoint = null;
+					var prevPointIndex = 0;
+					$("#placeholderphaseall").bind("plothover", function (event, pos, item) {
+						$("#x").text(pos.x.toFixed(2));
+						$("#y").text(pos.y.toFixed(2));
+						if (item) {
+							var xx = item.datapoint[0].toFixed(0)
+							if (previousPoint != item.dataIndex) {
+								previousPoint = item.dataIndex;
+								$("#tooltip").remove();
+								var x = item.datapoint[0].toFixed(0),
+								y = item.datapoint[1].toFixed(0);
+								for (var i=0;i<indexXObjects.length;i++)
+									{
+											if ((indexXObjects[i] == x) && (indexYObjects[i] == y))
+											{
+												showTooltip(item.pageX - 18, item.pageY + 48, phaseObjects[i]);
+											}
+									}
+							}
+						}
+					});
+				</script>
+				<% if (current_user_study.baseline_survey_responceset_id == nil) || (@responce_baseline_responce_set.completed == false) %>
+				<script type="text/javascript">
+				$(document).ready(function() {
+					$("#modal-content").modal('show');
+					$("#modal-content").modal({
+						backdrop: 'static',
+						keyboard: false
+					});
+					$("#modal-content").on('shown', function() {
+						$("#txtname").focus();
+					})
+				});
+				// BOTTOM OF PAGE
+				</script>
+				<% end %>
+				<% if ((@actual_phase.name == 'Phase 5') &&((@days_left_in_phase == 1) || (@study_did_finish == true))&&((current_user_study.followup_survey_responceset_id == nil) || (@responce_followup_responce_set.completed == false)))%>
+				<script type="text/javascript">
+				$(document).ready(function() {
+					$("#modal-content-followup").modal('show');
+					$("#modal-content-followup").modal({
+						backdrop: 'static',
+						keyboard: false
+					});
+					$("#modal-content-followup").on('shown', function() {
+						$("#txtname").focus();
+					})
+				});// BOTTOM OF PAGE
+				</script>
+				<% elsif ((@actual_phase.name == 'Phase 5') &&(@study_did_finish == true)&&((current_user_study.followup_survey_responceset_id != nil) && (@responce_followup_responce_set.completed == true)))%>
+				<script type="text/javascript">
+				$(document).ready(function() {
+					$("#modal-content-finished").modal('show');
+					$("#modal-content-finished").modal({
+						backdrop: 'static',
+						keyboard: false
+					});
+					$("#modal-content-finished").on('shown', function() {
+						$("#txtname").focus();
+					})
+				});// BOTTOM OF PAGE
+				</script>
+				<% end %>
+				<% if @phase_did_start == true %>
+				<script type="text/javascript">
+				$(document).ready(function() {
+					$("#modal-started-phase").modal('show');
+					$("#modal-started-phase").modal({
+						backdrop: 'static',
+						keyboard: false
+					});
+					$("#modal-started-phase").on('shown', function() {
+					})
+				});// BOTTOM OF PAGE
+				</script>
+				<% end %>
+				<% if current_user.new_achievements.size > 0 %>
+				<script type="text/javascript">
+				$(document).ready(function() {
+					$("#modal-content-show-new-achievements").modal('show');
+					$("#modal-content-show-new-achievements").modal({
+						backdrop: 'static',
+						keyboard: false
+					});
+					$("modal-content-show-new-achievements").on('shown', function() {
+					})
+				});// BOTTOM OF PAGE
+				</script>
+				<% end %>
+				<% if @phase_did_finish == true %>
+				<script type="text/javascript">
+				$(document).ready(function() {
+					$("#modal-finished-phase").modal('show');
+					$("#modal-finished-phase").modal({
+						backdrop: 'static',
+						keyboard: false
+					});
+					$("#modal-finished-phase").on('shown', function() {
+					})
+				});// BOTTOM OF PAGE
+				</script>
+				<% end %>
+				<script type="text/javascript">
+				$(document).ready(function() {
+					loggerPlacement();
+				});
+				$(window).resize(function() {
+					loggerPlacement();
+				});
+				function loggerPlacement() {
+				if($(window).width() < 1025) {
+					$('#bigGraph').before($('#stepLogger'));
+				} else {
+					$('#plus1024afterLogger').before($('#stepLogger'));
+				}};
+				// BOTTOM OF PAGE
+				</script>

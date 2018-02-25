@@ -1,0 +1,13 @@
+<h2>Add Phase</h2>
+<%= simple_form_for @phase  do |f| %>
+    <%= f.error_notification %>
+    <%= f.input :name, :required => true %>
+    <%= f.input :description, :required => true %>
+    <%= f.input :order_id, :required => true %>
+    <%= f.input :duration_in_days, :required => true %>
+    <%= f.input :start_on_day_of_study, :required => true %>
+    <%= f.input :finish_on_day_of_study, :required => true %>
+    <%= f.input :phase_baseline_percent_increase, :required => true %>
+    <%= f.association :study, collection: Study.all(order: 'name'), prompt: "Choose a Study" %>
+    <%= f.button :submit, 'Add Activity', :class => 'btn-primary' %>
+<% end %>

@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row-fluid">
+    <div class="span3 row-fluid">
+      
+    </div>
+    <div class="span6 row-fluid">
+      <p>Please fill out the following form to resend confirmation instructions.  If you have any questions or problems please contact the site administrator.</p>
+      <div class="row-fluid box paint color_2">
+        <div class="title">
+          <h4> <i class="icon-calendar"></i> <span>Resend confirmation instructions</span> </h4>
+        </div>
+        <div class="content">
+          <%= simple_form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post },input_html: { class: 'bs-docs-example form-horizontal'}) do |f| %>
+          <%= f.error_notification %>
+          <%= f.full_error :confirmation_token %>
+          <div class="control-group row-fluid">
+            <label class="control-label span3" for="inputPassword">Email:</label>
+            <div class="controls span9">
+              <%= f.input :email, :autofocus => true, label: false, input_html: { class: 'row-fluid' } %>
+            </div>
+          </div>
+          <div class="control-group row-fluid">
+            <div class="controls span7">
+            </div>
+            <div class="controls span5">
+              
+              <%= f.button :submit,  "Resend confirmation instructions", label: false, input_html: { class: 'btn btn-primary' } %>
+            </div>
+          </div>
+          
+          <% end %>
+          <%= render "devise/shared/links" %>
+        </div>
+      </div>
+    </div>
+    <div class="span3 row-fluid">
+      
+    </div>
+  </div>
+</div>

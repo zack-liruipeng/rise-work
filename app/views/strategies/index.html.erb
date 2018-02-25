@@ -1,0 +1,74 @@
+<div class="header row-fluid">
+ <div class="logo"> <a href="#"><span>Rise@Work</span></a> </div>
+<!-- End top-right -->
+</div>
+<div class="container">
+	<div class="row-fluid">
+				<div class="span12">
+					<div class="box paint">
+						<div class="title">
+							<div class="row-fluid">
+
+								 <h4>Strategies</h4>
+
+							</div>
+						</div>
+						<!-- End .title -->
+						<div class="content">
+
+							 <div class="row-fluid">
+								<div class="row-fluid well">
+
+
+									 <table class="table table-condensed table-striped">
+										<thead>
+											<tr>
+												<th>Name</th>
+												<th>Type</th>
+												<th>Sub-type</th>
+												<th>View</th>
+												<th>Delete</th>
+											</tr>
+										</thead>
+										<tbody>
+										<% @strategies.each do |strategy| %>
+											<tr>
+												<td><%= strategy.name %></td>
+												<td><%= strategy.strategy_type.to_s.titleize %></td>
+												<td><%= strategy.strategy_subtype.to_s.titleize %></td>
+												<td><%= link_to("View", strategy, :class => 'btn btn-mini') %></td>
+												<td><%= link_to("Delete", strategy, :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') %></td>
+											</tr>
+										<% end %>
+										</tbody>
+									</table>
+									</div>
+
+							<!-- End .row-fluid -->
+							<div class="row-fluid">
+								<div class="row-fluid well">
+									 <div class="span2 row-fluid">
+										 <%= link_to "Back", root_path,:class => 'btn btn-large btn-block btn-warning' %>
+									 </div>
+										<div class="span4 row-fluid">
+
+									 </div>
+									 <div class="span2 row-fluid">
+
+
+									 </div>
+									 <div class="span4 row-fluid">
+										 <%= render 'addstrategy' %>
+										 <a  data-toggle="modal" href="#addStrategyModal" class="btn btn-large btn-block btn-success" ><i class=" icon-pencil"></i>Add New Strategy/Route</a>
+									 </div>
+
+									<div class="marginB10"></div>
+								</div>
+							</div>
+							<!-- End .row-fluid -->
+						</div>
+						<!-- End .content -->
+					</div>
+				</div>
+		</div>
+</div>

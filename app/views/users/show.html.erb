@@ -1,0 +1,110 @@
+<div class="container">
+	<div class="row-fluid">
+		<div class="span2 row-fluid">
+		</div>
+		<%= simple_form_for @user, :url => user_path(@user), :html => {:method => :put, :class => 'form-horizontal' } do |f| %>
+		<div class="span8">
+			<div class="box paint">
+				<div class="title">
+					<div class="row-fluid">
+						<h4><%= @user.name %></h4>
+					</div>
+				</div>
+				<!-- End .title -->
+				<div class="content">
+					<!-- End .row-fluid -->
+					<div class="row-fluid">
+						<div class="row-fluid well">
+							<p>This is where you can view more detailed user information.  All information displayed must be kept strictly private and confidential.</p>
+						</div>
+					</div>
+					<table class="table table-condensed table-striped">
+						<thead>
+							<tr>
+								<th> Email:  </th>
+								<th><%= @user.email if @user.email %></th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- Added the username field, would like to have each of these editable, so that
+							we can change them. Could be part of accelerated testing? -->
+							<tr>
+								<th> Registered:  </th>
+								<th><%= @user.created_at.to_date %></th>
+							</tr>
+							<tr>
+								<td>Username:  </td>
+								<td><%= @user.name %></td>
+							</tr>
+							<tr>
+								<td>Role</td>
+								<td>
+								<!--	<%= radio_button_tag(:user_role, "2", !!(@user.role_ids.nil? || @user.role_ids[0] == 2)) %>
+									<%= label_tag(:User, "User") %> -->
+									<%= radio_button_tag(:user_role, "4", !!(@user.role_ids[0] == 1 || @user.role_ids[0] == 4)) %>
+									<%= label_tag(:Admin, "Research Admin") %>
+								</td>
+							</tr>
+							
+							<tr>
+								<td>Total Support Strategies</td>
+								<td> <%= @user.tasks.count %> </td>
+							</tr>
+							<tr>
+								<td>Achievements</td>
+								<td> <%= @user.user_achievements.count %> </td>
+							</tr>
+							<tr>
+								<td>Step Counts Logged</td>
+								<td> <%= @user.activities.count %> </td>
+							</tr>
+							<tr>
+								<td>Unique Days Steps Logged On</td>
+								<td> <%= @activity_dates.count %> </td>
+							</tr>
+							<tr>
+								<td>Completed Support Strategies</td>
+								<td> <%= @complete_SS %> </td>
+							</tr>
+							<tr>
+								<td>Completed Action Plans</td>
+								<td> <%= @complete_AP %> </td>
+							</tr>
+							<tr>
+								<td>Completed Routes</td>
+								<td> <%= @complete_Routes %> </td>
+							</tr>
+							<% if @user.activities.last.nil? == false%>
+							<tr>
+								<td> Last Step Logged</td>
+								<td> <%=time_ago_in_words(@user.activities.last.created_at)%> </td>
+							</tr>
+							<%end%>
+							<tr>
+								<td>Reminders </td>
+								<td>  <%= f.input :email_alerts,label: false, inline_label: '  Send missed step log reminder emails.' , :required => false%> </td>
+							</tr>
+						</tbody>
+					</table>
+					<!-- End .row-fluid -->
+					<div class="row-fluid">
+						<div class="row-fluid well">
+							<div class="span2 row-fluid">
+								<%= link_to "Back", users_path(resource_name),:class => 'btn btn-large btn-block btn-warning' %>
+							</div>
+							<div class="span4 row-fluid">
+							</div>
+							<div class="span5 row-fluid">
+								<%= f.button :submit, "Update", label: false, :class => 'btn btn-large btn-block btn-success' %>
+							</div>
+							<div class="marginB10"></div>
+						</div>
+					</div>
+					<!-- End .row-fluid -->
+				</div>
+				<!-- End .content -->
+			</div>
+		</div>
+		<%end%>
+	</div>
+</div>

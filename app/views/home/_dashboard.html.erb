@@ -1,0 +1,51 @@
+<div class="row-fluid box color_2 title_medium height_medium2 bar_stats paint_hover " style="padding-bottom: 0px;">
+  <div class="title hidden-phone">
+    <h5><span>Currently There are</span></h5>
+  </div>
+  <!-- End .title -->
+  <div class="content row-fluid fluid numbers" style="padding-bottom: 0px;">
+    <div class="span2 average_ctr" style="margin-left:260px;padding-left: 15px;">
+    <h1 class="value"><%= @home_dashboard.people_walking %></span></h1>
+    <div class="description mt15" >PEOPLE WALKING</div>
+  </div>
+  <div class="span4 shown_left" style="margin-left:0px;">
+    <div class="row-fluid fluid">
+      <div class="span6">
+        <div class="description">Taking Over</div>
+        <h2 class="value"><%= @StepsDaily %></h2>
+        <div class="progress small">
+          <div class="bar white" style="width: 100%;"></div>
+        </div>
+        <div class="description" >Steps Daily</div>
+      </div>
+      <div class="span6 full" style="margin-left:4px;">
+        <div class="description text_color_dark">Walking Over</div>
+        <h2 class="value text_color_dark"><%= @WalkingDistanceWeekly%> KM</h2>
+        <div class="progress small">
+          <div class="bar " style="width: 0%;">
+          </div>
+        </div>
+        <div class="description" >Weekly</div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="span4 total_days">
+    <div class="row-fluid">
+      <div class="span6 total_clicks">
+        <h1 class="value"><%= @Ttotal_steps_taken %></h1>
+        <div class="description mt15" >TOTAL STEPS</div>
+      </div>
+      <div class="span6 days_left">
+        <h1 class="value text_color_dark"><%= @home_dashboard.total_days_of_activity %></h1>
+        <div class="description mt15" >DAYS OF ACTIVITY</div>
+      </div>
+    </div>
+  </div>
+  <div class="span2">
+  </div>
+</div>
+<!-- End .row-fluid -->
+<!-- End .content -->
+</div>
+<!-- End .box -->

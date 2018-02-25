@@ -1,0 +1,46 @@
+<div id="modal-content-update-user" class="modal hide fade" tabindex="-1" data-width="760" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"  >
+  
+  <%= simple_form_for current_user, :url => user_path(current_user), :html => {:method => :put, :class => 'form-vertical' } do |f| %>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">View Account Settings</h3>
+  </div>
+  <div class="modal-body">
+    <p>These are your current account settings. Please contact the administrator if you have any questions.</p>
+    
+    <div class="row-fluid box color_0">
+      
+      <div class="content">
+        
+        <div class="form-row control-group row-fluid">
+          <label class="control-label span3">User Name: </label>
+          <div class="controls span9">
+            <%= f.input :name,:disabled => false, label: false, input_html: { class: 'row-fluid' }%>
+          </div>
+        </div>
+        <div class="form-row control-group row-fluid">
+          <label class="control-label span3">Email Address: </label>
+          <div class="controls span9">
+            <%= f.input :email,:disabled => false, label: false, input_html: { class: 'row-fluid span12' } %>
+          </div>
+        </div>
+        <div class="form-row control-group row-fluid">
+          <label class="control-label span3">Your current organization:</label>
+          <div class="control-group row-fluid span9">
+            <div class="controls span6 ">
+              <%= f.association :organization,label: false,:disabled => true, :class => 'row-fluid pull-right' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End .box -->
+    
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal">Close</button>
+    <%= f.button :submit, "Update", label: false, input_html: { class: 'btn btn-primary' } %>
+  </div>
+  
+  <% end %>
+</div>

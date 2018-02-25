@@ -1,0 +1,44 @@
+<div class="modal hide fade" id="modal-content-view-achievements" data-keyboard="false" data-backdrop="static" data-width="760">
+  <div class="modal-header">
+    <h3>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    Your Achievements
+    </h3>
+  </div>
+  <div class="modal-body ">
+    
+    <p>Achievement badges are awarded for a variety of activities like reaching step milestones, completing tasks, and using the action planning tool. All badges that you have earned during the entire program will be displayed here so that you can see how much you have accomplished!</p>
+    
+    <div id="main_container">
+      <div class="row-fluid">
+        <div class="span12">
+          <div class="box paint color_18">
+            <table class="responsive table table-striped table-bordered table-condensed" style="width:100%;margin-bottom:0; ">
+              <thead>
+                <tr>
+                  <th>Badge</th>
+                  <th>Achievement</th>
+                  <th>Description</th>
+                </tr>
+                
+              </thead>
+              <tbody>
+                <% current_user.achievements.each do |achievement| %>
+                <tr>
+                  <td><span class="icon"><img src="images/general/<%=achievement.image%>"></span></td>
+                  <td>
+                    <%=achievement.name %>
+                  </td>
+                  <td>
+                    <%=achievement.description %>
+                  </td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

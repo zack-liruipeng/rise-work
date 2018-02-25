@@ -1,0 +1,72 @@
+<div class="modal hide fade" id="modal-content-support-routes" data-keyboard="false" data-backdrop="static" data-width="760">
+	<div class="modal-header">
+		<h3>
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<%= @actual_phase.name %>  Routes
+		</h3>
+	</div>
+	<div class="modal-body">
+		<p>Take a look at the maps for some great ideas on walks at your workplace. You could explore a new place to have coffee, run some errands or find a route that gives you the opportunity for "me time".</p>
+		<div id="main_container">
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="box paint color_18">
+						<div class="description color_0">&nbsp;<b>Click on any of the routes below to view details and key benefits.</b></div>
+						<!-- End .title -->
+						<div class="content">
+							<div class="accordion" id="accordion1">
+								<% @strategies.each do |strategy| %>
+								<% if strategy.strategy_type == 'route' %>
+								<div class="accordion-group">
+									<div class="accordion-heading"> <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion1" href="#tab-route-<%=strategy.id%>"><i class=" icon-map-marker"></i><b> <%=strategy.name.html_safe%> </b></a> </div>
+									<div id="tab-route-<%=strategy.id%>" class="accordion-body collapse" > <div class="row-fluid"> <div class="span12">
+										<div style="height:100px; width:100%">
+											<% if strategy.map_image_url != nil %>
+											<a href="<%=strategy.map_url%>" target="_blank">
+												<img src="<%=strategy.map_image_url%>">
+											</a>
+											<% else %>
+											<a href="<%=strategy.map_url%>" target="_blank" style="color:white; text-align:center; padding:20px; font-size:30px;">
+											<i class="icon-map-marker"></i> Route Map</a>
+										</a>
+										<% end%>
+										<div class="description color_0"> &nbsp;&nbsp;Click on the above map to get route details.</div> </div>
+										<div class="box color_24" data-width="20">
+										</div>
+										<!-- End .box -->
+									</div>
+								</div>
+								<div class="accordion-inner">
+									<div class="row-fluid">
+										<div class="span12">
+											<%=strategy.content.html_safe%>
+											<%= simple_form_for :task, :url => tasks_path, :input_html => { :class => 'form-horizontal hide', :class => 'form-horizontal span12'  } do |f| %>
+											<div class="form-row control-group row-fluid fluid">
+												<%= f.hidden_field :name, :value => strategy.name %>
+												<%= f.hidden_field :strategy_id, :value => strategy.id %>
+												<%= f.hidden_field :strategy_description, :value => strategy.description %>
+												<%= f.hidden_field :strategy_when, :value => strategy.when %>
+												<%= f.hidden_field :strategy_where, :value => strategy.where %>
+												<%= f.hidden_field :strategy_what, :value => strategy.what %>
+												<%= f.hidden_field :strategy_task_type,:value =>'route' %>
+												<%= f.button :submit, "Add Route", :class => 'btn btn-primary' %>
+											</div>
+											<% end %>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<% end -%>
+						<% end %>
+					</div>
+				</div>
+				<!-- End .content -->
+				<div class="description color_0"> <i class=" icon-pushpin"></i>&nbsp;Tip : Add routes to planned activities by pressing the <b>Add Activity</b> button in each activity.</div>
+			</div>
+			<!-- End .box -->
+		</div>
+	</div>
+</div>
+</div>
+</div>

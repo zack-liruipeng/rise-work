@@ -1,0 +1,65 @@
+<div class="header row-fluid">
+	<div class="logo"> <a href="#"><span>Rise@Work</span></a> </div>
+	<!-- End top-right -->
+</div>
+<div class="container">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="box paint">
+				<div class="title">
+					<div class="row-fluid">
+						<h4>Organizations</h4>
+					</div>
+				</div>
+				<!-- End .title -->
+				<div class="content">
+					<div class="row-fluid">
+						<div class="row-fluid well">
+							<table class="table table-condensed table-striped">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Data</th>
+										<th>Edit</th>
+									</tr>
+								</thead>
+								<tbody>
+									<% @organizations.each do |organization| %>
+									<tr>
+										<td>
+											<%=link_to organization.name, organization_path(organization.id)  %>
+										</td>
+										<td>
+											<%= link_to("Get Data", organization_getdata_path(organization.id), :class => 'btn btn-mini') %>
+										</td>
+										<td>
+											<%= render "editorganization", :organization => organization %>
+											<a data-toggle="modal" data-target="#modal-content-edit-organization-<%= organization.id %>">Edit</a>
+										</td>
+									</tr>
+									<% end %>
+								</tbody>
+							</table>
+						</div>
+						<!-- End .row-fluid -->
+						<div class="row-fluid">
+							<div class="row-fluid well">
+								<div class="span4 row-fluid">
+									<%= link_to "Back", root_path,:class => 'btn btn-large btn-block btn-warning' %>
+								</div>
+								<div class="span4 row-fluid">
+								</div>
+								<div class="span4 row-fluid">
+									<%= render 'registerorganization' %>
+									<a  data-toggle="modal" href="#organizationModal" class="btn btn-large btn-block btn-success" ><i class=" icon-plus"></i>Add New Organization</a>
+								</div>
+								<div class="marginB10"></div>
+							</div>
+						</div>
+						<!-- End .row-fluid -->
+					</div>
+					<!-- End .content -->
+				</div>
+			</div>
+		</div>
+	</div>

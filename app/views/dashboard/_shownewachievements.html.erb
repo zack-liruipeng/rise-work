@@ -1,0 +1,46 @@
+<div class="modal hide fade" id="modal-content-show-new-achievements" data-keyboard="false" data-backdrop="static" data-width="760">
+  <div class="modal-header">
+    <h3>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    Congratulations! Keep up the good work!
+    </h3>
+  </div>
+  <div class="modal-body ">
+    
+    <p>You have earned the following:</p>
+    
+    <div id="main_container">
+      <div class="row-fluid">
+        <div class="span12">
+          <div class="box paint color_18">
+            <table class="responsive table table-striped table-bordered table-condensed" style="width:100%;margin-bottom:0; ">
+              <thead>
+                <tr>
+                  <th>Badge</th>
+                  <th>Achievement</th>
+                  <th>Description</th>
+                </tr>
+                
+              </thead>
+              <tbody>
+                <% @new_achievements.each do |achievement| %>
+                <tr>
+                  <td><span class="icon"><img src="images/general/<%=achievement.image%>"></span></td>
+                  <td>
+                    <%=achievement.name %>
+                  </td>
+                  <td>
+                    <%=achievement.description %>
+                  </td>
+                  
+                  
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

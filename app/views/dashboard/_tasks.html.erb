@@ -1,0 +1,186 @@
+
+<div class="box gradient color_25">
+  <div class="title row-fluid">
+    <h4 class="pull-left"> <i class="icon-star"></i> <span>Planned Activities</span></h4>
+    <div class="btn-toolbar pull-right ">
+      <div class="btn-group"> <%- if @user_tasks.count > 0 %> <a data-toggle="modal"href="#modal-content-edit-tasks" class="btn"id="noBkgdShdw">EDIT</a> <%end%></div>
+    </div>
+  </div>
+  <!-- End .title -->
+
+  <% if @actual_phase.name != "Baseline" %>
+  <div class="content row-fluid" style="width:100%;min-height:245px;" id="noBkgdShdw">
+
+    <div class="accordion" id="accordion3">
+
+      <% @user_tasks.each do |task| %>
+
+      <%- if task.completed == false %>
+      <% if task.task_type == 'userdefined' %> 
+
+                      <div class="accordion-group color_14">
+                  <div class="accordion-heading"> <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion4" href="#tab-todoc-<%=task.id%>"><i class=" icon-time"></i><b> <%=task.what.to_s.html_safe%> </b></a> </div>
+                  <div id="tab-todoc-<%=task.id%>" class="accordion-body collapse" > 
+                    <div class="accordion-inner"> 
+
+          
+
+ <div class="row-fluid">
+      
+             
+
+              <div class="span12"> 
+
+                <div class="row-fluid"> <div class="span6"> 
+                  <p>This is a customized outline of the steps you will take to engage in a specific activity so you can reach your new target step count. </p>
+                   <% if (task.barriers.nil? == false) %>
+                  <p><b>Barriers: </b><%=task.barriers.html_safe%></p>  
+                  <% end %>
+                </div>
+
+                 <div class="span6"> <table id="datatable_example" class="responsive table table-striped table-bordered" style="width:100%;margin-bottom:0; "> <thead>
+
+                  <tr> <th class="">Details</th> </tr> 
+
+                </thead> 
+
+                <tbody> 
+                  <tr> <td><b>Where: </b><%=task.where.to_s.html_safe%> </td> </tr> 
+                  <tr> <td><b>When: </b><%=task.when.to_s.html_safe%></td> </tr>
+                  <tr> <td><b>Steps: </b><%=task.activity_amount.to_s.html_safe%> </td> </tr>
+                   </tbody> </table> </div> </div>
+
+                    
+
+                    <%= simple_form_for task, :url => task_path(task), :input_html => { :class => 'form-horizontal hide', :class => 'form-horizontal span12'  } do |f| %>
+
+          <%= f.hidden_field :completed, :value => true %>
+
+          <div class="form-row control-group row-fluid fluid">
+
+
+
+
+            <%= f.button :submit, "Complete Activity", :class => 'btn btn-primary' %>
+
+
+
+
+          </div>
+
+          <% end -%>
+                  </div></div>
+                 
+
+                    </div>
+                  </div>
+                </div>
+
+
+      <% elsif task.strategy.strategy_type == 'route' %>   
+
+      <div class="accordion-group color_18">
+        <div class="accordion-heading"> <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion3" href="#tab-todo-<%=task.strategy.id%>"><i class=" icon-map-marker"></i><b> <%=task.strategy.name.html_safe%> </b></a>  </div>
+        <div id="tab-todo-<%=task.strategy.id%>" class="accordion-body collapse" > <div class="row-fluid"> <div class="span12">
+          <div style="height:100px; width:100%"><a href="<%=task.strategy.map_url%>"><img src="<%=task.strategy.map_image_url%>"></a><div class="description color_0"> &nbsp;&nbsp;Click on the above map to get route details.</div> </div>
+          <div class="box color_24" data-width="20">
+
+          </div>
+          <!-- End .box --> 
+        </div>
+      </div>
+      <div class="accordion-inner"> 
+     <div class="row-fluid">
+
+        <div class="span12">       <%=task.strategy.content.html_safe%> 
+
+          <%= simple_form_for task, :url => task_path(task), :input_html => { :class => 'form-horizontal hide', :class => 'form-horizontal span12'  } do |f| %>
+
+          <%= f.hidden_field :completed, :value => true %>
+
+          <div class="form-row control-group row-fluid fluid">
+
+
+
+
+            <%= f.button :submit, "Complete Activity", :class => 'btn btn-primary' %>
+
+
+
+
+          </div>
+
+          <% end -%>
+
+        </div></div>
+
+
+      </div>
+    </div>
+  </div>
+             <% elsif task.strategy.strategy_type == 'support' %>    
+
+                <div class="accordion-group color_12">
+                  <div class="accordion-heading"> <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion4" href="#tab-todo-<%=task.strategy.id%>"><i class="icon-heart"></i><b> <%=task.strategy.name.html_safe%> </b></a> </div>
+                  <div id="tab-todo-<%=task.strategy.id%>" class="accordion-body collapse" > 
+                    <div class="accordion-inner"> 
+
+          
+
+ <div class="row-fluid">
+      
+             
+
+              <div class="span12">       <%=task.strategy.content.html_safe%> 
+
+                    <%= simple_form_for task, :url => task_path(task), :input_html => { :class => 'form-horizontal hide', :class => 'form-horizontal span12'  } do |f| %>
+
+          <%= f.hidden_field :completed, :value => true %>
+
+          <div class="form-row control-group row-fluid fluid">
+
+
+
+
+            <%= f.button :submit, "Complete Activity", :class => 'btn btn-primary' %>
+
+
+
+
+          </div>
+
+          <% end -%>
+                  </div></div>
+                 
+
+                    </div>
+                  </div>
+                </div>
+                  <% end %>
+
+
+
+
+  <% end -%>
+  <% end %>
+</div>
+
+
+
+</div>
+
+
+<% else %>
+
+<div class="content icon big_icon color_25 " style="width:100%;height:245px;" id="noBkgdShdw"> <a  data-toggle="modal" href="#" ><img align="center" src="images/general/lock_icon.png" /></a>
+  <div class="description">TASKS (LOCKED)</div>
+</div>
+</div>
+<% end %>
+
+</div>
+<!-- End .box --> 
+
+
+
+

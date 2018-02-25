@@ -1,0 +1,33 @@
+<div class="modal hide fade" id="modal-content-edit-tasks" data-keyboard="false" data-backdrop="static" data-width="760">
+  <div class="modal-header">
+    <h3>
+    Edit <%= @actual_phase.name %>  Planned Activities,
+    </h3>
+  </div>
+  <div class="modal-body">
+    <table class="table table-condensed">
+      <tbody>
+        <% @user_tasks.each do |task| %>
+        <%- if task.completed == false %>
+        <tr>
+          <td>
+            <%= task.name.to_s.html_safe %>
+          </td>
+          <td>
+            <%= task.description.to_s.html_safe %>
+          </td>
+          <td>
+            <%= link_to "Delete Planned Activity", task_path(task), :data => { :confirm => "Are you sure your want to delete this planned activity?" }, :method => :delete %>
+          </td>
+        </tr>
+        <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <a href="#" class="btn btn-primary close" data-dismiss="modal">
+      Close
+    </a>
+  </div>
+</div>

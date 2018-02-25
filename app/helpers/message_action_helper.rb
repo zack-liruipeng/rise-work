@@ -1,0 +1,2 @@
+module MessageActionHelper
+end

@@ -1,0 +1,109 @@
+<%= simple_form_for :user_survey_responce, :url => user_survey_responces_path, :input_html => { :method => :put, :class => 'form-vertical'  } do |f| %>
+<%= f.error_notification %>
+<%= display_base_errors resource %>
+<div class="container">
+  <div class="row-fluid">
+    <div class="span2 row-fluid">
+    </div>
+    
+    <div class="span8">
+      <div class="box paint">
+        <div class="title">
+          <div class="row-fluid">
+            <% if @current_question.question_type == 'INFORMATION' %>
+            <h4> RISE@Work Baseline Questionnaire</h4>
+            <% else %>
+            <h4><%=@current_question.survey_section.title%></h4>
+            <%end%>
+          </div>
+        </div>
+        <!-- End .title -->
+        <div class="content">
+          
+          <!-- End .row-fluid -->
+          <div class="row-fluid">
+            e
+            <p><%=@current_question.description%></p>
+          </div>
+        </div>
+        <% if @current_question.question_type != 'INFORMATION' %>
+        <div class="row-fluid">
+          <div class="row-fluid well">
+          <blockquote><strong><%= @current_question.question %></strong></blockquote>
+          <div class="span2 row-fluid">
+          </div>
+          <% if @current_question.question_type == 'TEXT' %>
+          <div class="span8 row-fluid we1ll ">
+            <%= f.input :question_responce, label: false, input_html: { class: 'row-fluid' }%>
+          </div>
+          <% elsif @current_question.question_type == 'GENDER' %>
+          <div class="span8 row-fluid we1ll ">
+            <%= f.input :question_responce,label: false, collection: [:' male', :' female'],as: :check_boxes %>
+          </div>
+          <% elsif @current_question.question_type == 'WEIGHT' %>
+          <div class="span8 row-fluid we1ll ">
+            <%= f.input :question_responce_weight, label: false, input_html: { class: 'row-fluid' },placeholder: "Please enter your weight and select the units" %>
+            <%= f.input :question_responce_units,label: false, collection: [:kg, :lb] %>
+          </div>
+          <% elsif @current_question.question_type == 'HEIGHT' %>
+          <div class="span8 row-fluid we1ll ">
+            <%= f.input :question_responce_height, label: false, input_html: { class: 'row-fluid' },placeholder: "Please enter your height and select the units"  %>
+            <%= f.input :question_responce_units,label: false, collection: [:cm, :ft] %>
+          </div>
+          <% elsif @current_question.question_type == 'EDUCATION' %>
+          <div class="span8 row-fluid we1ll ">
+            <%= f.input :question_responce,label: false, collection: [:'no formal qualifications', :'secondary school (high school)',:'trade/apprenticeship (e.g., hairdresser, chef)',:'certificate or diploma (e.g., childcare, technician)',:'university, tertiary or higher education (e.g., bachelor’s, master’s, PhD)'],as: :radio_buttons %>
+          </div>
+          <% elsif @current_question.question_type == 'DAYSPERWEEK' %>
+          <div class="span8 row-fluid we1ll ">
+            <%= f.input :question_responce, label: false, input_html: { class: 'row-fluid' }, placeholder: "days per week" %>
+          </div>
+          <% elsif @current_question.question_type == 'HOURSMINUTES' %>
+          <div class="span8 row-fluid we1ll ">
+            <%= f.input :question_responce_hours, label: false, input_html: { class: 'row-fluid' },placeholder: "hours per day"  %>
+            <%= f.input :question_responce_minutes, label: false, input_html: { class: 'row-fluid' },placeholder: "minutes per day"  %>
+          </div>
+          <% elsif @current_question.question_type == 'YESNO' %>
+          <div class="span8 row-fluid we1ll ">
+            <%= f.input :question_responce_hours, label: false, input_html: { class: 'row-fluid' },placeholder: "hours per day"  %>
+            <%= f.input :question_responce_minutes, label: false, input_html: { class: 'row-fluid' },placeholder: "minutes per day"  %>
+          </div>
+          <% elsif @current_question.question_type == 'HOURSPERWEEK' %>
+          <div class="span8 row-fluid we1ll ">
+            <%= f.input :question_responce, label: false, input_html: { class: 'row-fluid' }, placeholder: "hours per week" %>
+          </div>
+          <%end%>
+          <div class="span2 row-fluid">
+          </div>
+        </div>
+      </div>
+      <%end%>
+      <%= f.hidden_field :question_id, :value => @current_question.id %>
+      
+      <!-- End .row-fluid -->
+      <div class="row-fluid">
+        <div class="row-fluid well">
+          <div class="span2 row-fluid">
+            <button type="button" class="btn btn-large btn-block btn-danger">Back</button>
+          </div>
+          <div class="span4 row-fluid">
+          </div>
+          <div class="span5 row-fluid">
+            <%= f.button :submit, 'Update', :class => 'btn btn-large btn-block btn-success' %>
+          </div>
+          
+          <div class="marginB10"></div>
+        </div>
+      </div>
+      <!-- End .row-fluid -->
+    </div>
+    <!-- End .content -->
+  </div>
+</div>
+
+<div class="span2 row-fluid">
+</div>
+</div>
+</div>
+
+<% end %>

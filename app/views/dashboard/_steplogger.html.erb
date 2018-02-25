@@ -1,0 +1,124 @@
+
+<div class="box color_26 row-fluid height_medium">
+            <div class="title">
+              <h4 class="pull-left"> <i class="icon-th-list"></i> <span>LOG STEPS</span> </h4>
+              <div class="btn-toolbar pull-right " >
+                <div class="btn-group"> <%- if @user_phase.activities.count > 0 %> <a data-toggle="modal" id="plus1024noBkgdShdw" href="#modal-content-edit-activity" class="btn">EDIT</a><%end%></div>
+              </div>
+            </div>
+            <div class="content row-fluid fluid">
+              <%= simple_form_for :activity, :url => activities_path, :input_html => { :class => 'form-horizontal hide', :class => 'form-horizontal span12'  } do |f| %>
+ 
+
+                <div class="form-row control-group row-fluid fluid">
+               <div class="span12">
+                     <%= f.input :activity_date, :autofocus => false, placeholder: "Date", label: false, my_wrapper_html: { id: 'special_id' }, input_html: { class: 'row-fluid pull-right date activity_date_picker', :id => "activity_date_picker"}%>
+                </div>
+                <div class="span12"  style="margin-left:0px; padding-left:0px;" >
+                    <%= f.input :amount, :autofocus => false, placeholder: "Steps Taken", label: false, input_html: { class: 'row-fluid pull-right'} %>
+            </div>
+
+            <div class="span12"  style="margin-left:0px; padding-left:0px;" >
+                    <%= f.button :submit, "Submit Steps",input_html: { class: 'btn btn-primary'}  %>
+              </div>
+              </div>
+               <% end %>
+              <!-- End .content --> 
+            </div>
+            <!-- End .box --> 
+ </div>
+
+
+<% if @user_phase.start_date.nil? == false %>
+<script type="text/javascript">
+
+var loggedDates = new Array();
+
+<% @user_phase.activities.sort_by(&:activity_date).each do |activity| %>
+loggedDates.push('<%=activity.activity_date.strftime("%b %d, %Y")%>')
+<% end%>
+
+startDate = new Date('<%=@user_phase.start_date.strftime("%b %d, %Y")%>')
+
+currentData = new Date()
+endDate = new Date('<%=(@user_phase.start_date + @actual_phase.duration_in_days.days).strftime("%b %d, %Y")%>')
+minDate = new Date('<%=(@current_of_phase_date_time - @maxPastDate.days - 1.day).strftime("%b %d, %Y")%>')
+
+
+$('.activity_date_picker').datepicker({
+    format: 'dd-mm-yyyy',
+    orientation:  "top left",
+    
+  beforeShowDay: function (date) {
+    for (var count=0; count<loggedDates.length; count++) {
+    newDate = new Date(loggedDates[count])
+    console.log("New Date " + newDate)
+    console.log("start Date " + startDate)
+    console.log("Current Date " + currentData)
+    console.log("Cal Date " + date)
+    console.log("end Date " + endDate)
+    console.log("min Date " + minDate)
+    if  ((date.getMonth() <= endDate.getMonth()) || (date.getFullYear() < endDate.getFullYear()) ){
+          
+        if ((date.getDate() == newDate.getDate()) && (date.getMonth() == newDate.getMonth()) && (date.getFullYear() == newDate.getFullYear())){
+            return {
+                tooltip: 'Steps have been logged for this day',
+                classes: 'logged'
+            }
+        }
+    }
+  }
+
+  for (var count=0; count<loggedDates.length; count++) {
+          newDate = new Date(loggedDates[count])
+    if  ((date.getMonth() <= endDate.getMonth()) || (date.getFullYear() < endDate.getFullYear()) ){
+
+    console.log("New Date " + newDate)
+    console.log("Cal Date " + date)
+     if ((date >= startDate) && (date < minDate)){
+        return {
+              tooltip: 'Too late! You can not log steps for this day.',
+              classes: 'missed'
+        }
+      }
+      else if ((date >= startDate) && (date <= currentData)){
+        return {
+              tooltip: 'Please log steps for this day.',
+              classes: 'missing'
+        }
+      }
+    }
+  }
+  if  ((date.getMonth() <= endDate.getMonth()) || (date.getFullYear() < endDate.getFullYear()) ){
+
+    if ((date >= startDate) && (date < minDate)){
+      return {
+        tooltip: 'Too late! You can not log steps for this day.',
+        classes: 'missed'
+      }
+    }
+    if ((date >= startDate) && (date <= currentData)){
+        return {
+              tooltip: 'Please log steps for this day.',
+              classes: 'missing'
+            }
+        }
+    else if ((date >= startDate) && (date < endDate)){
+      return {
+        tooltip: 'Future day of the phase',
+        classes: 'phase'
+      }
+    }
+    else{
+      console.log("nothing to log")
+      return { }
+    }
+  }
+}
+,
+startDate: "<%=(@user_phase.start_date - @maxPastDate.days).strftime("%d/%m/%Y") %>",
+endDate: "<%= DateTime.now.strftime("%d/%m/%Y") %>"
+});
+
+  </script>
+  <%end%>

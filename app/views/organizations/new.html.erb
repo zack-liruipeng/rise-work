@@ -1,0 +1,14 @@
+<h2>Add Organization</h2>
+<%= simple_form_for @organization  do |f| %>
+<%= f.error_notification %>
+<%= f.input :name, :required => true %>
+<%= f.input :address, :required => true %>
+<%= f.input :city, :required => true %>
+<%= f.input :province, :required => true %>
+<%= f.input :country, :required => true %>
+<%= f.input :postal_code, :required => true %>
+<%= f.input :time_zone, :required => true %>
+<%= f.input :licenses, :required => true %>
+<%= f.input :note, :required => true %>
+<%= f.button :submit, 'Add Organization', :class => 'btn-primary' %>
+<% end %>

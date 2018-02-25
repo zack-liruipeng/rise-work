@@ -1,0 +1,92 @@
+<div class="container">
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="box paint">
+        <div class="title">
+          <div class="row-fluid">
+            
+            <h4>Study Participants</h4>
+            
+          </div>
+        </div>
+        <!-- End .title -->
+        <div class="content">
+          
+          <!-- End .row-fluid -->
+          <div class="row-fluid">
+            <div class="row-fluid well">
+              <p>Below you will find a list of all participants currently enrolled in the study and their study-specific information. All information displayed must be kept strictly private and confidential. Users may be deleted from this page; however this feature should be used with caution - once a user is deleted, all of their data is also deleted and they cannot be reinstated without re-registering.</p>
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="row-fluid well">
+              
+              <table class="table table-condensed table-striped">
+                <thead>
+                  <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Current Phase</th>
+                    <th># signed in</th>
+                    <th>Last Sign In</th>
+                    <th>Baseline</th>
+                    <th>Followup</th>
+                    <th>Steps</th>
+                    <th>Strts/Achv</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @users.each do |user| %>
+                  <tr>
+                    <td><%= link_to user.name, user %></td>
+                    <td><a href="mailto:<%= user.email %>?Subject=Hello%20again" target="_top">
+                    <%= user.email %></a></td>
+                    <td><%=user.user_phases.find_by_id(user.user_studies.find_by_study_id(1).current_user_phase).phase.name unless user.user_phases.find_by_id(user.user_studies.find_by_study_id(1).current_user_phase).nil?%></td>
+                    <td><%=user.sign_in_count %></td>
+                    <td><%=time_ago_in_words(user.current_sign_in_at) %> ago</td>
+                    <td>
+                      <%if user.user_studies.find_by_study_id(1).baseline_survey_responceset_id %>
+                      <%= link_to "Get", :controller => "surveys", :action => "show", :id => user.user_studies.find_by_study_id(1).baseline_survey_responceset_id , :format=>:xml %>
+                      <%end%>
+                    </td>
+                    <td>
+                      <%if user.user_studies.find_by_study_id(1).followup_survey_responceset_id %>
+                      <%= link_to "Get", :controller => "surveys", :action => "show", :id => user.user_studies.find_by_study_id(1).followup_survey_responceset_id , :format=>:xml %>
+                      <%end%>
+                    </td>
+                    <td>
+                      <%= link_to "Get", :controller => "activities", :action => "show", :id => user.id , :format=>:xml%>
+                    </td>
+                    <td>
+                      <%= link_to "Get", :controller => "tasks", :action => "show", :id => user.id , :format=>:xml %>
+                    </td>
+                    
+                    <td><%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-mini') unless user == current_user %></td>
+                  </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+            <!-- End .row-fluid -->
+            <div class="row-fluid">
+              <div class="row-fluid well">
+                <div class="span2 row-fluid">
+                  <%= link_to "Back", root_path,:class => 'btn btn-large btn-block btn-warning' %>
+                </div>
+                <div class="span4 row-fluid">
+                  
+                </div>
+                <div class="span5 row-fluid">
+                  
+                </div>
+                
+                <div class="marginB10"></div>
+              </div>
+            </div>
+            <!-- End .row-fluid -->
+          </div>
+          <!-- End .content -->
+        </div>
+      </div>
+    </div>
+  </div>

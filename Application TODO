@@ -1,0 +1,130 @@
+TODO:
+
+-Lock app d/ls in baseline
+
+
+
+bugs: missing consent when not all infl put into registration X
+-Registarion consent update needed X
+-Change finish survey button to green X
+
+
+
+
+Add bugfix when finished survey : show modal X
+-place holder only work with text can validate number... X
+
+
+Change name of site X
+remove happy from login page X
+
+
+Task list details X
+
+fix sign in error page X
+fix all reset password and email validation pages x
+
+Home Page:
+Dashboard 
+	-add achivements X
+	-change happy
+	-fix layout of links X
+
+	-Add content X
+
+	-Menu
+		-About us X
+		-Sign Up - add text and proper layout X
+		-contact us info links and address X
+		-Help FAQ
+
+	-RAW link X
+
+	-Add Admin view X
+
+Logged in dash
+	-accoutn settings add text remove fieds and layout X
+	-help add content - PDF Subha
+	-Hover over tips
+	-Add links to app downloads
+	-Action aplnning layout and text X
+	-Support strats layout and text X
+	-Routes -X
+	-Barrier planning X
+
+	-step logger text deatils text X
+	-fix tasks X
+
+	tasks - add support for barrier * make pretty X
+	planning tasks validation when displayed X
+
+	Add time zone support X
+	Maps inamge stretch
+	add long routes X
+	hide barriers
+
+	Achivements layout and text X
+	-Add achivement coutn on main icon 
+
+
+	-Add d/l button links
+
+	-create task scheduler X cron for 3 AM everyday
+
+	-Change default user X
+	-Change app salt X
+
+	-Fix server prodution env to for email X
+	-change production  email  address for emails sent
+
+	-Change emails for accoutn validations
+
+	-Survey sertup and validations for questions X
+
+	-Menu icons
+
+	BUGS:
+win app - default time needs to be set to 30min
+
+
+
+Skip Sequence conditions X
+
+
+Add custome surveys X
+Survey Design stuff X
+		Survey
+
+		Section
+
+		Question
+			Type
+
+		Collections
+			Array - text
+
+		Answers
+			Type
+
+
+			checkbox
+				-Collection
+
+			textbox
+				-Text
+
+			radio
+				-Collection
+
+			timepair 
+				-int
+				-int
+
+
+
+
+
+
+
+
+

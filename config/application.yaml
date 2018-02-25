@@ -1,0 +1,14 @@
+defaults: &defaults
+  admin_name: admin
+  admin_email: webmaster@cs.dal.ca
+  email: webmaster@cs.dal.ca
+  secret: foo123
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

@@ -1,0 +1,90 @@
+<div class="container">
+	<div class="row-fluid">
+
+		<div class="span2 row-fluid">
+
+			</div>
+
+			<div class="span8">
+				<div class="box paint">
+					<div class="title">
+						<div class="row-fluid">
+
+							<h4><%= @strategy.name %></h4>
+
+						</div>
+					</div>
+					<!-- End .title -->
+					<div class="content">
+
+						<!-- End .row-fluid -->
+						<div class="row-fluid">
+							<div class="row-fluid well">
+								<p>This is where you can view all information regarding a specific strategy.</p>
+
+							</div>
+						</div>
+
+
+						<table class="table table-condensed table-striped">
+							<tbody>
+
+
+							<tr>
+								<td>Type</td>
+								<td> <%= @strategy.strategy_type.to_s.titleize %> </td>
+
+							</tr>
+							<tr>
+								<td>Sub-type</td>
+								<td> <%= @strategy.strategy_subtype.to_s.titleize %> </td>
+							</tr>
+
+						</tbody>
+					</table>
+					<hr/>
+					<%= @strategy.content.html_safe %>
+					<hr/>
+					<% if @strategy.strategy_type == 'route' %>
+					<div class="row-fluid">
+						<div class="row-fluid well">
+								<div class="row-fluid">
+									<% if @strategy.map_image_url != nil %>
+										<a href="<%=@strategy.map_url%>" target="_blank">
+											<img src="<%=@strategy.map_image_url%>">
+											<div class="description color_0"> &nbsp;&nbsp;Click on the above map to get route details.</div> </div>
+											<div class="box color_24" data-width="20"></div>
+										</a>
+									<% else %>
+										<a href="<%= @strategy.map_url %>" target="_blank" style="color:white; text-align:center; font-size:30px;"><i class="icon-map-marker"></i> Route Map</a>
+									<% end %>
+								</div>
+								<br/>
+								<div class="description color_0"><h3>Click on the above map to get route details.</h3></div>
+						</div>
+					</div>
+					<% end %>
+
+
+					<!-- End .row-fluid -->
+					<div class="row-fluid">
+						<div class="row-fluid well">
+							<div class="span2 row-fluid">
+								<%= link_to "Back", '/strategies',:class => 'btn btn-large btn-block btn-warning' %>
+
+
+							</div>
+							<div class="span4 row-fluid">
+
+							</div>
+
+							<div class="marginB10"></div>
+						</div>
+					</div>
+					<!-- End .row-fluid -->
+				</div>
+				<!-- End .content -->
+			</div>
+		</div>
+	</div>
+</div>

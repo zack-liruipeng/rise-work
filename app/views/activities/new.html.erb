@@ -1,0 +1,7 @@
+<h2>Add Activity</h2>
+<%= simple_form_for @activity  do |f| %>
+    <%= f.error_notification %>
+    <%= f.hidden_field :user_id %>
+    <%= f.input :activity_type, :required => true %>
+    <%= f.button :submit, 'Add Activity', :class => 'btn-primary' %>
+<% end %>

@@ -1,0 +1,66 @@
+<div id="organizationModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-width="760">
+  <%= simple_form_for Organization.new do |f| %>
+  <%= f.error_notification %>
+  <%= display_base_errors resource %>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Please fill out all fields for an organization.</h3>
+  </div>
+  <div class="modal-body">
+    <div class="row-fluid box color_0">
+      <div class="content">
+        <div class="form-row control-group row-fluid">
+          <label class="control-label span3">Type of Organization: </label>
+          <div class="controls span9">
+            <%= f.input :organization_type, label: false, :required => true, placeholder: "Type", input_html: { class: 'row-fluid' }%>
+          </div>
+        </div>
+        <div class="form-row control-group row-fluid">
+          <label class="control-label span3">Name of Organization: </label>
+          <div class="controls span9">
+            <%= f.input :name, label: false, :required => true, placeholder: "Name", input_html: { class: 'row-fluid' }%>
+          </div>
+        </div>
+        <div class="form-row control-group row-fluid">
+          <label class="control-label span3">Address of Organization: </label>
+          <div class="controls span9">
+            <%= f.input :address, label: false, :required => true, placeholder: "Address", input_html: { class: 'row-fluid' }%>
+            <%= f.input :city, label: false, :required => true, placeholder: "City", input_html: { class: 'row-fluid' }%>
+            <%= f.input :province, label: false, :required => true, placeholder: "Province", input_html: { class: 'row-fluid' }%>
+            <%= f.input :country, label: false, :required => true, placeholder: "Country", input_html: { class: 'row-fluid' }%>
+            <%= f.input :postal_code, label: false, :required => true, placeholder: "Postal Code", input_html: { class: 'row-fluid' }%>
+          </div>
+        </div>
+        <div class="form-row control-group row-fluid">
+          <label class="control-label span3">Time Zone: </label>
+          <div class="controls span9">
+            <%= f.input :time_zone, label: false, :required => true, placeholder: "Time Zone", input_html: { class: 'row-fluid' }%>
+          </div>
+        </div>
+        <div class="form-row control-group row-fluid">
+          <label class="control-label span3">Licenses: </label>
+          <div class="controls span9">
+            <%= f.input :licenses, label: false, :required => true, placeholder: "Licenses", input_html: { class: 'row-fluid' }%>
+          </div>
+        </div>
+        <div class="form-row control-group row-fluid">
+          <label class="control-label span3">Secret Key: </label>
+          <div class="controls span9">
+            <%= f.input :secret_key, label: false, :required => true, placeholder: "Secret Key", input_html: { class: 'row-fluid' }%>
+          </div>
+        </div>
+        <div class="form-row control-group row-fluid">
+          <label class="control-label span3">Note: </label>
+          <div class="controls span9">
+            <%= f.input :note, label: false, :required => true, placeholder: "Note", input_html: { class: 'row-fluid' }%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal">Close</button>
+    <%= f.button :submit, "Create Organization", label: false, input_html: { class: 'btn btn-primary' } %>
+  </div>
+  <% end %>
+</div>

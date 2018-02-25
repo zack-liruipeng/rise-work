@@ -1,0 +1,70 @@
+<div class="header row-fluid">
+	<div class="logo"> <a href="#"><span>Rise@Work</span></a> </div>
+	<!-- End top-right -->
+</div>
+<div class="container">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="box paint">
+				<div class="title">
+					<div class="row-fluid">
+						<h4><%= @organization.name %></h4>
+					</div>
+				</div>
+				<!-- End .title -->
+				<div class="content">
+					<div class="row-fluid">
+						<div class="row-fluid well">
+							<h3>Users:</h3>
+							<table class="table table-condensed table-striped">
+								<thead>
+									<tr>
+										<th>
+											Name
+										</th>
+										<th>
+											Steps Taken
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<% @users.each do |user| %>
+									<tr>
+										<% if user.organization_id == @organization.id %>
+										<td>
+											<%= user.name %>
+										</td>
+										<% @total_steps_taken = 0 %>
+										<% user.activities.all.sort_by(&:activity_date).each_with_index do |activity, index| %>
+										<% if activity.amount %>
+										<% @total_steps_taken += activity.amount %>
+										<% end %>
+										<% end %>
+										<td>  <%= @total_steps_taken %></td>
+										<% end %>
+									</tr>
+									<% end %>
+								</tbody>
+							</table>
+						</div>
+						<!-- End .row-fluid -->
+						<div class="row-fluid">
+							<div class="row-fluid well">
+								<div class="span2 row-fluid">
+									<%= link_to "Back", "/organizations",:class => 'btn btn-large btn-block btn-warning' %>
+								</div>
+								<div class="span4 row-fluid">
+								</div>
+								<div class="span2 row-fluid">
+								</div>
+								<div class="marginB10"></div>
+							</div>
+						</div>
+						<!-- End .row-fluid -->
+					</div>
+					<!-- End .content -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

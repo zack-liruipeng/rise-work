@@ -1,0 +1,121 @@
+
+
+
+
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'form-vertical' }) do |f| %>
+<%= f.error_notification %>
+<%= display_base_errors resource %>
+
+<div class="container">
+	<div class="row-fluid">
+
+		<div class="span2 row-fluid">
+
+		</div>
+
+		<div class="span8 row-fluid">
+			<p>There was a problem while trying to register your account.  Please make the appropriate corrections and continue.  If you have any questions or experience further problems please contact the site administrator.</p>
+
+			<div class="row-fluid box color_0">
+
+				<div class="content">
+
+					<div class="form-row control-group row-fluid">
+						<label class="control-label span3">User Name: </label>
+						<div class="controls span9">
+							<%= f.input :name, label: false, :required => true, placeholder: "Name", input_html: { class: 'row-fluid' }%>
+						</div>
+					</div>
+					<div class="form-row control-group row-fluid">
+						<label class="control-label span3">Email Address: </label>
+						<div class="controls span9">
+							<%= f.input :email, :autofocus => true, :required => true, placeholder: "Email", label: false, input_html: { class: 'row-fluid span12' } %>
+						</div>
+					</div>
+
+					<div class="form-row control-group row-fluid">
+						<label class="control-label span3">Study Information:</label>
+						<div class="control-group row-fluid span9">
+							<div class="controls span6 ">
+								<%= f.association :organization, :required => true,label: false,  collection: Organization.all(order: 'name'), prompt: "Choose an Organization", input_html: { class: 'chzn-select' } %>
+							</div>
+							<div class="controls span6">
+								<%= f.input :secret_key, label: false, :required => true, placeholder: "Study ID Key", input_html: { class: 'row-fluid' }%>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-row control-group row-fluid">
+						<label class="control-label span3">Password:</label>
+						<div class="controls span9 ">
+							<div class=" row-fluid">
+								<%= f.input :password, :required => true,placeholder: "min 8 characters", label: false, input_html: { class: 'row-fluid' } %>
+							</div>
+						</div>
+					</div>
+					<div class="control-group row-fluid">
+						<label class="control-label span3">Confirm Password:</label>
+						<div class="controls span9">
+							<div class="row-fluid">
+								<%= f.input :password_confirmation, label: false, :required => true, placeholder: "confirm password", input_html: { class: 'row-fluid' }%>
+							</div>
+						</div>
+					</div>
+					<div class="form-row control-group row-fluid">
+						<label class="control-label span3" for="default-textarea">Consent Information:</label>
+						<div class="controls span9">
+							<textarea rows="8" class="text-error row-fluid" disabled id="default-textarea"> <%=Article.find_by_name('EUA').content.html_safe %>
+							</textarea>
+						</div>
+					</div>
+					<div class="form-row control-group row-fluid">
+						<label class="control-label span3"> </label>
+
+						<div class="controls span9">
+
+								<%= f.input :did_accept_eula,label: false, inline_label: '  I agree to take part in this study' , :required => true%>
+
+							</div>
+
+
+
+
+						</div>
+
+						<div class="form-row control-group row-fluid">
+						<label class="control-label span10"> </label>
+
+						<div class="controls span2">
+
+								<%= f.button :submit, 'Register', :class => 'btn-primary' %>
+
+							</div>
+
+
+
+
+						</div>
+
+
+					
+			
+				<!-- End .box --> 
+
+
+
+				
+
+<%= render "devise/shared/links" %>
+				</div>
+
+					</div>
+			</div>
+
+			<% end %>
+
+			<div class="span2 row-fluid">
+
+			</div>
+
+		</div>
+	</div>

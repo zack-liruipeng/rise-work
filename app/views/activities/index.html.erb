@@ -1,0 +1,9 @@
+<h1>All Activities</h1>
+
+<ul>
+  <% @activities.each do |activity| %>
+      <li>
+        <%= activity.activity_type %>
+      </li>
+  <% end %>
+</ul>

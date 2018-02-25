@@ -1,0 +1,48 @@
+<div id="modal-content-edit-organization" class="modal hide fade" tabindex="-1" data-width="760" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"  >
+  
+  <%= simple_form_for @organization, :url => organization_path(@organization), :html => {:method => :put, :class => 'form-vertical' } do |f| %>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Change Organization</h3>
+  </div>
+  <div class="modal-body">
+    <div class="row-fluid box color_0">
+      
+      <div class="content">
+        
+        <div class="form-row control-group row-fluid">
+          <label class="control-label span3">Name: </label>
+          <div class="controls span9">
+            <%= f.input :name,:disabled => false, label: false, input_html: { class: 'row-fluid' }%>
+          </div>
+        </div>
+        <div class="form-row control-group row-fluid">
+          <label class="control-label span3">Licenses: </label>
+          <div class="controls span9">
+            <%= f.input :licenses,:disabled => false, label: false, input_html: { class: 'row-fluid' }%>
+          </div>
+        </div>
+        <div class="form-row control-group row-fluid">
+          <label class="control-label span3">Secret Key: </label>
+          <div class="controls span9">
+            <%= f.input :secret_key,:disabled => false, label: false, input_html: { class: 'row-fluid' }%>
+          </div>
+        </div>
+        <div class="form-row control-group row-fluid">
+          <label class="control-label span3">Any Additional Notes: </label>
+          <div class="controls span9">
+            <%= f.input :note,:disabled => false, label: false, input_html: { class: 'row-fluid' }%>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End .box -->
+    
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal">Close</button>
+    <%= f.button :submit, "Update", label: false, input_html: { class: 'btn btn-primary' } %>
+  </div>
+  
+  <% end %>
+</div>

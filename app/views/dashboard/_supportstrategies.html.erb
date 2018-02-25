@@ -1,0 +1,54 @@
+<div class="modal hide fade" id="modal-content-support-strategies" data-keyboard="false" data-backdrop="static" data-width="760">
+	<div class="modal-header">
+		<h3>
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<%= @actual_phase.name %>  Support Strategies
+		</h3>
+	</div>
+	<div class="modal-body">
+		<p> Support Strategies are tips on how to achieve your target in this phase. While some may not suit your routine, try to integrate these ideas into your working day wherever possible.   </p>
+		<div id="main_container">
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="box paint color_12">
+						<div class="description color_0">&nbsp;<b>Click on any of the strategies below to view details and key benefits.</b></div>
+						<!-- End .title -->
+						<div class="content">
+							<div class="accordion" id="accordion4">
+								<% @strategies.each do |strategy| %>
+								<% if strategy.strategy_type == 'support' %>
+								<div class="accordion-group">
+									<div class="accordion-heading"> <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion4" href="#tab-strategy-<%=strategy.id%>"><i class=" icon-heart"></i><b> <%=strategy.name.html_safe%> </b></a> </div>
+									<div id="tab-strategy-<%=strategy.id%>" class="accordion-body collapse" >
+										<div class="accordion-inner">
+											<div class="row-fluid">
+												<div class="span12">       <%=strategy.content.html_safe%>
+													<%= simple_form_for :task, :url => tasks_path, :input_html => { :class => 'form-horizontal hide', :class => 'form-horizontal span12'  } do |f| %>
+													<div class="form-row control-group row-fluid fluid">
+														<%= f.hidden_field :name, :value => strategy.name %>
+														<%= f.hidden_field :strategy_id, :value => strategy.id %>
+														<%= f.hidden_field :strategy_description, :value => strategy.description %>
+														<%= f.hidden_field :strategy_when, :value => strategy.when %>
+														<%= f.hidden_field :strategy_where, :value => strategy.where %>
+														<%= f.hidden_field :strategy_what, :value => strategy.what %>
+														<%= f.hidden_field :strategy_task_type,:value =>'support' %>
+														<%= f.button :submit, "Add Activity", :class => 'btn btn-primary' %>
+													</div>
+													<% end %>
+												</div></div>
+											</div>
+										</div>
+									</div>
+									<% end %>
+									<% end %>
+								</div>
+							</div>
+							<!-- End .content -->
+							<div class="description color_0"> <i class=" icon-pushpin"></i>&nbsp;Tip : Add strategies to planned activities by pressing the <b>Add Activity</b> button in each activity.</div>
+						</div>
+						<!-- End .box -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

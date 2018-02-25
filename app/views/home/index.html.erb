@@ -1,0 +1,112 @@
+<div id="main">
+  <%= render 'layouts/navigation' %>
+  <%= render 'registeruser' %>
+  <div id="aboutModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-width="760">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel"><%=  @about_us.name %></h3>
+    </div>
+    <div style="height:100px; width:100%"><img src="images/general/UofT/location_map.png"><div class="description color_0"> &nbsp;&nbsp;Check us out at location listed above.</div> </div>
+    <div class="modal-body">
+      <div id="main_container">
+        <div class="row-fluid">
+          <div class="span12">
+            <div class="span7">
+              <hr>
+              <%= simple_format @about_us.content %>
+              <hr>
+            </div>
+            <div class="span4">
+              <hr>
+              <h3><span>Rise@Work</span></h3>
+              <address>
+                School of Health and Human Performance, Division of Kinesiology<br>
+                Dalhousie University<br>
+                6230 South Street, PO Box 15000<br>
+                Halifax, NS B3H 4R2<br>
+              </address>
+              <address>
+                <strong>Contact Us</strong><br>
+                <a href="mailto:#">rise@dal.ca</a>
+              </address>
+              <hr>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="helpModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel"><%=  @help.name %></h3>
+    </div>
+    <div class="modal-body">
+      <%= simple_format @help.content %>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+  <div id="main_container">
+    <div class="row-fluid" id="plus1024">
+      <%= render 'dashboard' %>
+    </div>
+    <!-- End .row-fluid -->
+    <div class="row-fluid">
+      <div class="span5a">
+        <%= render 'signin' %>
+      </div>
+      <!-- End .span4 -->
+      <div class="span7a">
+        <div class="row-fluid box color_25 paint"  >
+          <div class="title">
+            <h4> <i class=" icon-info-sign"></i><span><%=  @who_we_are.name %></span> </h4>
+          </div>
+          <div class="content contentText" id="noBkgdShdw">
+            <%= simple_format @who_we_are.content %>
+          </div>
+        </div>
+        <!-- End .box -->
+      </div>
+      <!-- End .span7 -->
+    </div>
+    <!-- End .row-fluid -->
+    <div class="row-fluid">
+      <div class="span4a">
+        <div class="box paint_hover color_14">
+          <div class="title">
+            <h4> <i class="icon-star"></i> <span><%=  @what_do_we_do.name %></span> </h4>
+          </div>
+          <div class="content contentText" id="noBkgdShdw"> <%= simple_format @what_do_we_do.content %> </div>
+        </div>
+        <!-- End .box -->
+      </div>
+      <!-- End .span4 -->
+      <div class="span4a">
+        <div class="box paint_hover color_18">
+          <div class="title">
+            <h4> <i class="icon-heart"></i> <span><%=  @why_join_us.name %></span> </h4>
+          </div>
+          <div class="content contentText" id="noBkgdShdw"> <%= simple_format @why_join_us.content %></div>
+        </div>
+        <!-- End .box -->
+      </div>
+      <!-- End .span4 -->
+      <div class="span4a">
+        <div class="box paint_hover color_15">
+          <div class="title">
+            <h4> <i class="icon-globe"></i> <span><%=  @our_partners.name %></span> </h4>
+          </div>
+          <div class="content contentText" id="noBkgdShdw"> <%= simple_format @our_partners.content %></div>
+        </div>
+        <!-- End .box -->
+      </div>
+      <!-- End .span4 -->
+    </div>
+    <!-- End .row-fluid -->
+  </div>
+  <!-- End #container -->
+</div>
+</div>
+</div>

@@ -1,0 +1,10 @@
+<h2>Add Study</h2>
+<%= simple_form_for @study  do |f| %>
+    <%= f.error_notification %>
+    <%= f.input :name, :required => true %>
+    <%= f.input :study_type, :required => true %>
+    <%= f.input :description, :required => true %>
+    <%= f.input :duration_in_days, :required => true %>
+
+    <%= f.button :submit, 'Add Study', :class => 'btn-primary' %>
+<% end %>
